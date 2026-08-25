@@ -1,0 +1,57 @@
+name: Deploy
+
+# Gitflow: só a main é publicável. Nada aqui roda a partir da develop —
+# o site em produção é sempre a última versão que passou por um release.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validar o site
+        run: node scripts/validar.mjs
+
+      - name: Gerar manifesto de participantes
+        run: node scripts/gerar-manifesto.mjs
+
+      - name: Registrar informações do build
+        run: |
+          printf '{\n  "versao": "%s",\n  "commit": "%s",\n  "data": "%s"\n}\n' \
+            "$(cat VERSION)" "${GITHUB_SHA}" "$(date -u '+%d/%m/%Y %H:%M UTC')" > data/build.json
+
+      - uses: actions/configure-pages@v5
+
+      - name: Empacotar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    name: Publicar no GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,70 @@
+name: Abrir release
+
+# Passos 1 e 2 do ciclo: congelar a develop em uma branch release/x.y.z,
+# gravar a versão e fechar a seção do CHANGELOG.
+# Dispare em Actions → Abrir release → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      versao:
+        description: 'Versão a preparar (ex.: 1.1.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  abrir:
+    name: Criar branch de release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Conferir o formato da versão
+        run: |
+          if ! printf '%s' "${{ inputs.versao }}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::'${{ inputs.versao }}' não é uma versão semver (ex.: 1.1.0)."
+            exit 1
+          fi
+
+      - name: Criar a branch
+        run: |
+          BRANCH="release/${{ inputs.versao }}"
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            echo "::error::A branch $BRANCH já existe."
+            exit 1
+          fi
+          git switch -c "$BRANCH"
+
+      - name: Gravar VERSION e fechar o CHANGELOG
+        run: node scripts/preparar-release.mjs "${{ inputs.versao }}" "$(date -u '+%Y-%m-%d')"
+
+      - name: Validar antes de publicar a branch
+        run: node scripts/validar.mjs
+
+      - name: Commitar e enviar
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add VERSION CHANGELOG.md
+          git commit -m "chore(release): prepara a versão ${{ inputs.versao }}"
+          git push -u origin "release/${{ inputs.versao }}"
+
+      - name: Abrir o Pull Request para a main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create --draft \
+            --base main \
+            --head "release/${{ inputs.versao }}" \
+            --title "Release ${{ inputs.versao }}" \
+            --body-file .github/release-pr-body.md

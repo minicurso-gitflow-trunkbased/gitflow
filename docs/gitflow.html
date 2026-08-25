@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia rápido de Gitflow</title>
+  <meta name="description" content="Guia rápido do fluxo Gitflow usado neste minicurso: comandos, alvos de PR e o ciclo de release.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a class="marca" href="../index.html">🌿 <strong>Minicurso</strong> Gitflow</a>
+      <button id="alternar-tema" class="botao-tema" type="button" aria-label="Alternar tema claro/escuro">🌗</button>
+    </nav>
+  </header>
+
+  <main class="container hero">
+    <p class="etiqueta">Guia</p>
+    <h1>Gitflow em cinco regras</h1>
+    <p class="subtitulo">O suficiente para trabalhar neste repositório sem errar o alvo do Pull Request.</p>
+  </main>
+
+  <section class="container secao">
+    <ol class="linha-tempo">
+      <li>
+        <h3>1. Duas branches são permanentes</h3>
+        <p><code>main</code> é o que está publicado; <code>develop</code> é o que será publicado. Todo o resto é temporário e deve ser apagado depois do merge.</p>
+      </li>
+      <li>
+        <h3>2. Você nunca commita direto na <code>main</code> nem na <code>develop</code></h3>
+        <p>Sempre a partir de uma <code>feature/*</code>, com Pull Request. As duas branches permanentes são protegidas — o push direto é recusado pelo GitHub.</p>
+      </li>
+      <li>
+        <h3>3. O alvo do PR depende de onde a branch nasceu</h3>
+        <p><code>feature/*</code> → <code>develop</code>. <code>release/*</code> e <code>hotfix/*</code> → <code>main</code>, e depois de volta para a <code>develop</code>. A CI recusa o PR se o alvo estiver errado.</p>
+      </li>
+      <li>
+        <h3>4. Versão é decisão, não consequência</h3>
+        <p>O número em <code>VERSION</code> só muda dentro de uma branch <code>release/*</code> ou <code>hotfix/*</code>. Sua feature nunca mexe nele — mexe no <code>CHANGELOG.md</code>, na seção <em>Não lançado</em>.</p>
+      </li>
+      <li>
+        <h3>5. O que entrou na <code>main</code> tem que voltar para a <code>develop</code></h3>
+        <p>Correções feitas em release ou hotfix precisam do back-merge, senão reaparecem como bug na versão seguinte. Aqui isso vira um PR automático.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="container secao">
+    <h2>Colinha de comandos</h2>
+    <div class="cartoes">
+      <article class="cartao">
+        <h3>Começar uma feature</h3>
+        <pre><code>git switch develop
+git pull
+git switch -c feature/minha-tarefa
+# ... trabalhe ...
+git push -u origin feature/minha-tarefa
+# PR com base em develop</code></pre>
+      </article>
+      <article class="cartao">
+        <h3>Depois que o PR foi integrado</h3>
+        <pre><code>git switch develop
+git pull
+git branch -d feature/minha-tarefa
+git push origin --delete feature/minha-tarefa</code></pre>
+      </article>
+      <article class="cartao destaque">
+        <h3>Preparar um release</h3>
+        <pre><code># pelo GitHub: Actions → Abrir release
+# ou manualmente:
+git switch develop &amp;&amp; git pull
+git switch -c release/1.1.0
+node scripts/preparar-release.mjs 1.1.0
+git commit -am "chore(release): prepara a versão 1.1.0"
+git push -u origin release/1.1.0</code></pre>
+      </article>
+      <article class="cartao">
+        <h3>Hotfix em produção</h3>
+        <pre><code>git switch main &amp;&amp; git pull
+git switch -c hotfix/1.0.1
+# corrija, e então:
+node scripts/preparar-release.mjs 1.0.1
+git commit -am "fix: corrige ..."
+git push -u origin hotfix/1.0.1
+# PR para main — e depois back-merge para develop</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <section class="container secao">
+    <h2>O que doeu?</h2>
+    <p class="secao-intro">
+      Guarde essas percepções para a discussão final do minicurso — elas são o material
+      da comparação com o repositório trunk-based:
+    </p>
+    <ul class="lista-marcada">
+      <li class="nao">Quanto tempo passou entre o seu commit e ele aparecer no site?</li>
+      <li class="nao">Quantos passos foram necessários para publicar uma mudança de uma linha?</li>
+      <li class="nao">Sua branch conflitou? Ela tinha quantos dias de vida?</li>
+      <li class="ok">Em compensação: você conseguiu dizer exatamente <em>qual versão</em> tem cada mudança?</li>
+      <li class="ok">E conseguiu voltar o site inteiro para uma versão anterior com um comando?</li>
+    </ul>
+    <p class="nota"><a href="../index.html">← Voltar para a página inicial</a></p>
+  </section>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

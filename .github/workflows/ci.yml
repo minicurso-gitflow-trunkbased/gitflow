@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [develop, 'feature/**', 'release/**', 'hotfix/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    name: Validar
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Estrutura, HTML, JSON e versionamento
+        run: node scripts/validar.mjs
+
+      - name: Manifesto de participantes
+        run: node scripts/gerar-manifesto.mjs
+
+  alvo-do-pr:
+    name: Conferir o alvo do Pull Request
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      ORIGEM: ${{ github.head_ref }}
+      DESTINO: ${{ github.base_ref }}
+    steps:
+      # O erro mais comum de quem está aprendendo Gitflow é abrir o PR na branch
+      # errada. Em vez de descobrir isso na revisão, a CI diz na hora.
+      - name: Validar origem → destino
+        run: |
+          echo "PR: $ORIGEM → $DESTINO"
+          case "$ORIGEM" in
+            feature/*)
+              if [ "$DESTINO" != "develop" ]; then
+                echo "::error::Branches feature/* integram na develop, não em '$DESTINO'."
+                exit 1
+              fi ;;
+            release/*|hotfix/*)
+              if [ "$DESTINO" != "main" ] && [ "$DESTINO" != "develop" ]; then
+                echo "::error::Branches release/* e hotfix/* integram na main (e voltam para a develop), não em '$DESTINO'."
+                exit 1
+              fi ;;
+            backmerge/*)
+              if [ "$DESTINO" != "develop" ]; then
+                echo "::error::Branches backmerge/* existem para levar a main de volta à develop."
+                exit 1
+              fi ;;
+            *)
+              if [ "$DESTINO" = "main" ]; then
+                echo "::error::Só release/*, hotfix/* e backmerge/* podem integrar na main. Renomeie sua branch ou mire na develop."
+                exit 1
+              fi
+              echo "::warning::Branch '$ORIGEM' fora da convenção do Gitflow (feature/*, release/*, hotfix/*). Integração na '$DESTINO' permitida, mas renomeie quando puder." ;;
+          esac
+          echo "Alvo do PR está correto."

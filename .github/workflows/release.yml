@@ -1,0 +1,77 @@
+name: Release
+
+# Passos 5 e 6 do ciclo: quando um release chega na main, marca a versão
+# e devolve a main para a develop.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  marcar:
+    name: Tag, release e back-merge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Ler a versão
+        id: versao
+        run: echo "v=$(cat VERSION | tr -d '[:space:]')" >> "$GITHUB_OUTPUT"
+
+      - name: A tag já existe?
+        id: tag
+        run: |
+          if git rev-parse -q --verify "refs/tags/v${{ steps.versao.outputs.v }}" >/dev/null; then
+            echo "existe=true" >> "$GITHUB_OUTPUT"
+            echo "Tag v${{ steps.versao.outputs.v }} já existe — nada a fazer."
+          else
+            echo "existe=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Criar a tag
+        if: steps.tag.outputs.existe == 'false'
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git tag -a "v${{ steps.versao.outputs.v }}" -m "Versão ${{ steps.versao.outputs.v }}"
+          git push origin "v${{ steps.versao.outputs.v }}"
+
+      - name: Criar o GitHub Release
+        if: steps.tag.outputs.existe == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/notas-da-versao.mjs "${{ steps.versao.outputs.v }}" > /tmp/notas.md
+          gh release create "v${{ steps.versao.outputs.v }}" \
+            --title "v${{ steps.versao.outputs.v }}" \
+            --notes-file /tmp/notas.md
+
+      - name: Abrir o back-merge para a develop
+        if: steps.tag.outputs.existe == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Sem o back-merge, tudo que foi corrigido dentro do release (ou em um
+          # hotfix) some na próxima versão. É o passo mais esquecido do Gitflow.
+          if git diff --quiet origin/develop origin/main; then
+            echo "develop já contém tudo o que está na main — back-merge desnecessário."
+            exit 0
+          fi
+          BRANCH="backmerge/v${{ steps.versao.outputs.v }}"
+          git switch -c "$BRANCH"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --base develop \
+            --head "$BRANCH" \
+            --title "Back-merge da v${{ steps.versao.outputs.v }} para a develop" \
+            --body "Leva para a \`develop\` o que foi ajustado durante o release **v${{ steps.versao.outputs.v }}**. Integre logo: enquanto este PR estiver aberto, a \`develop\` está atrás da produção."
