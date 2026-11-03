@@ -3,58 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minicurso: Gitflow na prática</title>
-  <meta name="description" content="Laboratório de Gitflow do minicurso: branches de longa duração, ciclo de release, tags e changelog.">
+  <title data-i18n="meta.title.index">Minicurso: Gitflow na prática</title>
+  <meta name="description" data-i18n-attr="content:meta.desc.index" content="Laboratório de Gitflow do minicurso: branches de longa duração, ciclo de release, tags e changelog.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <a class="skip-link" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
 
   <header class="topo">
-    <nav class="nav container" aria-label="Navegação principal">
+    <nav class="nav container" aria-label="Navegação principal" data-i18n-attr="aria-label:nav.aria">
       <a class="marca" href="#inicio">🌿 <strong>Minicurso</strong> Gitflow</a>
       <ul class="nav-links">
-        <li><a href="#modelo">O modelo</a></li>
-        <li><a href="#branches">Branches</a></li>
-        <li><a href="#release">Ciclo de release</a></li>
-        <li><a href="#participantes">Participantes</a></li>
-        <li><a href="#contribuir">Contribuir</a></li>
+        <li><a href="#modelo" data-i18n="nav.modelo">O modelo</a></li>
+        <li><a href="#branches" data-i18n="nav.branches">Branches</a></li>
+        <li><a href="#release" data-i18n="nav.release">Ciclo de release</a></li>
+        <li><a href="#participantes" data-i18n="nav.participantes">Participantes</a></li>
+        <li><a href="#contribuir" data-i18n="nav.contribuir">Contribuir</a></li>
       </ul>
-      <button id="alternar-tema" class="botao-tema" type="button" aria-label="Alternar tema claro/escuro">🌗</button>
+      <button id="alternar-tema" class="botao-tema" type="button" aria-label="Alternar tema claro/escuro" data-i18n-attr="aria-label:tema.aria">🌗</button>
     </nav>
   </header>
 
   <main id="conteudo">
     <section id="inicio" class="hero container">
-      <p class="etiqueta">IFPR · Minicurso</p>
-      <h1>Gitflow na prática</h1>
-      <p class="subtitulo">
+      <p class="etiqueta" data-i18n="hero.etiqueta">IFPR · Minicurso</p>
+      <h1 data-i18n="hero.titulo">Gitflow na prática</h1>
+      <p class="subtitulo" data-i18n-html="hero.sub">
         O laboratório do outro lado da comparação. Aqui nada vai direto para a
         <code>main</code>: todo trabalho passa por <code>develop</code>, vira um
         <code>release/*</code>, ganha uma tag e só então é publicado.
       </p>
       <div class="acoes">
-        <a class="botao botao-primario" href="#contribuir">Como participar</a>
-        <a class="botao" href="docs/gitflow.html">Guia do fluxo</a>
+        <a class="botao botao-primario" href="#contribuir" data-i18n="hero.cta">Como participar</a>
+        <a class="botao" href="docs/gitflow.html" data-i18n="hero.guia">Guia do fluxo</a>
       </div>
       <dl class="metricas">
-        <div><dt>Versão publicada</dt><dd><span class="selo-versao" id="versao">—</span></dd></div>
-        <div><dt>Participantes</dt><dd data-metrica="participantes">—</dd></div>
-        <div><dt>Branches fixas</dt><dd>2</dd></div>
+        <div><dt data-i18n="metricas.versao">Versão publicada</dt><dd><span class="selo-versao" id="versao">—</span></dd></div>
+        <div><dt data-i18n="metricas.participantes">Participantes</dt><dd data-metrica="participantes">—</dd></div>
+        <div><dt data-i18n="metricas.branches">Branches fixas</dt><dd>2</dd></div>
       </dl>
     </section>
 
     <section id="modelo" class="container secao">
-      <h2>O modelo em um desenho</h2>
-      <p class="secao-intro">
+      <h2 data-i18n="modelo.titulo">O modelo em um desenho</h2>
+      <p class="secao-intro" data-i18n-html="modelo.intro">
         Duas branches vivem para sempre (<code>main</code> e <code>develop</code>). As outras
         nascem, cumprem um papel e morrem. O caminho de uma ideia até a produção passa,
         obrigatoriamente, por todas elas.
       </p>
       <div class="diagrama">
         <svg viewBox="0 0 720 260" role="img" aria-labelledby="titulo-diagrama">
-          <title id="titulo-diagrama">Diagrama do fluxo Gitflow: uma feature sai de develop, volta para develop, entra em uma branch de release e é publicada em main com tag</title>
+          <title id="titulo-diagrama" data-i18n="modelo.svg.titulo">Diagrama do fluxo Gitflow: uma feature sai de develop, volta para develop, entra em uma branch de release e é publicada em main com tag</title>
 
           <!-- trilhos -->
           <path class="linha" d="M60 40 H660" stroke="#c0392b" opacity=".25"/>
@@ -89,75 +89,75 @@
           <circle class="no" cx="580" cy="230" r="6" fill="#c98a2b"/>
 
           <text class="rotulo" x="596" y="26">v1.1.0</text>
-          <text class="rotulo" x="248" y="204">commits da feature</text>
-          <text class="rotulo" x="500" y="254">ajustes finais</text>
+          <text class="rotulo" x="248" y="204" data-i18n="modelo.svg.commits">commits da feature</text>
+          <text class="rotulo" x="500" y="254" data-i18n="modelo.svg.ajustes">ajustes finais</text>
         </svg>
         <div class="legenda">
-          <span><i style="background:#c0392b"></i> main — o que está publicado</span>
-          <span><i style="background:#2f5f9f"></i> develop — integração contínua do time</span>
-          <span><i style="background:#8e6bbf"></i> feature/* — uma tarefa</span>
-          <span><i style="background:#c98a2b"></i> release/* — estabilização e versão</span>
+          <span><i style="background:#c0392b"></i> <span data-i18n="modelo.legenda.main">main — o que está publicado</span></span>
+          <span><i style="background:#2f5f9f"></i> <span data-i18n="modelo.legenda.develop">develop — integração contínua do time</span></span>
+          <span><i style="background:#8e6bbf"></i> <span data-i18n="modelo.legenda.feature">feature/* — uma tarefa</span></span>
+          <span><i style="background:#c98a2b"></i> <span data-i18n="modelo.legenda.release">release/* — estabilização e versão</span></span>
         </div>
       </div>
     </section>
 
     <section id="branches" class="container secao">
-      <h2>Quem sai de onde, quem volta para onde</h2>
-      <p class="secao-intro">
+      <h2 data-i18n="branches.titulo">Quem sai de onde, quem volta para onde</h2>
+      <p class="secao-intro" data-i18n="branches.intro">
         Essa tabela é a regra do jogo neste repositório. Errar o alvo do Pull Request é
         o engano mais comum de quem está começando com Gitflow.
       </p>
       <div class="rolagem">
         <table class="tabela-branches">
           <thead>
-            <tr><th>Branch</th><th>Nasce de</th><th>Volta para</th><th>Serve para</th></tr>
+            <tr><th data-i18n="branches.th.branch">Branch</th><th data-i18n="branches.th.nasce">Nasce de</th><th data-i18n="branches.th.volta">Volta para</th><th data-i18n="branches.th.serve">Serve para</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>main</code></td><td>—</td><td>—</td><td>Sempre reflete o que está publicado. Cada commit aqui tem uma tag.</td></tr>
-            <tr><td><code>develop</code></td><td><code>main</code></td><td>—</td><td>Onde o trabalho do time se acumula até formar a próxima versão.</td></tr>
-            <tr><td><code>feature/*</code></td><td><code>develop</code></td><td><code>develop</code></td><td>Uma tarefa. Nunca fala com a <code>main</code> diretamente.</td></tr>
-            <tr><td><code>release/*</code></td><td><code>develop</code></td><td><code>main</code> <em>e</em> <code>develop</code></td><td>Congelar escopo, ajustar versão e changelog, corrigir os últimos detalhes.</td></tr>
-            <tr><td><code>hotfix/*</code></td><td><code>main</code></td><td><code>main</code> <em>e</em> <code>develop</code></td><td>Emergência em produção, sem esperar o próximo release.</td></tr>
+            <tr><td><code>main</code></td><td>—</td><td>—</td><td data-i18n="branches.main">Sempre reflete o que está publicado. Cada commit aqui tem uma tag.</td></tr>
+            <tr><td><code>develop</code></td><td><code>main</code></td><td>—</td><td data-i18n="branches.develop">Onde o trabalho do time se acumula até formar a próxima versão.</td></tr>
+            <tr><td><code>feature/*</code></td><td><code>develop</code></td><td><code>develop</code></td><td data-i18n-html="branches.feature">Uma tarefa. Nunca fala com a <code>main</code> diretamente.</td></tr>
+            <tr><td><code>release/*</code></td><td><code>develop</code></td><td><code>main</code> <em data-i18n="branches.e">e</em> <code>develop</code></td><td data-i18n="branches.release">Congelar escopo, ajustar versão e changelog, corrigir os últimos detalhes.</td></tr>
+            <tr><td><code>hotfix/*</code></td><td><code>main</code></td><td><code>main</code> <em data-i18n="branches.e">e</em> <code>develop</code></td><td data-i18n="branches.hotfix">Emergência em produção, sem esperar o próximo release.</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section id="release" class="container secao">
-      <h2>O ciclo de release</h2>
-      <p class="secao-intro">
+      <h2 data-i18n="release.titulo">O ciclo de release</h2>
+      <p class="secao-intro" data-i18n-html="release.intro">
         Compare mentalmente com o repositório trunk-based: lá, publicar é <code>git push</code>.
         Aqui são seis passos — e é exatamente esse custo que você precisa sentir para
         decidir quando ele vale a pena.
       </p>
       <ol class="linha-tempo">
-        <li><h3>1. Congelar</h3><p>Cria-se <code>release/1.1.0</code> a partir de <code>develop</code>. A partir daqui, nenhuma feature nova entra nessa versão.</p></li>
-        <li><h3>2. Preparar</h3><p><code>VERSION</code> e <code>CHANGELOG.md</code> são atualizados na branch de release.</p></li>
-        <li><h3>3. Estabilizar</h3><p>Só correções entram. Cada uma é levada de volta para <code>develop</code> também.</p></li>
-        <li><h3>4. Publicar</h3><p>Merge em <code>main</code> → a Action de deploy leva a versão para o ar.</p></li>
-        <li><h3>5. Marcar</h3><p>Uma tag <code>v1.1.0</code> e um GitHub Release são criados automaticamente a partir do <code>CHANGELOG</code>.</p></li>
-        <li><h3>6. Voltar</h3><p>Back-merge de <code>main</code> para <code>develop</code>, para que a correção não se perca na próxima versão.</p></li>
+        <li><h3 data-i18n="release.p1.titulo">1. Congelar</h3><p data-i18n-html="release.p1.texto">Cria-se <code>release/1.1.0</code> a partir de <code>develop</code>. A partir daqui, nenhuma feature nova entra nessa versão.</p></li>
+        <li><h3 data-i18n="release.p2.titulo">2. Preparar</h3><p data-i18n-html="release.p2.texto"><code>VERSION</code> e <code>CHANGELOG.md</code> são atualizados na branch de release.</p></li>
+        <li><h3 data-i18n="release.p3.titulo">3. Estabilizar</h3><p data-i18n-html="release.p3.texto">Só correções entram. Cada uma é levada de volta para <code>develop</code> também.</p></li>
+        <li><h3 data-i18n="release.p4.titulo">4. Publicar</h3><p data-i18n-html="release.p4.texto">Merge em <code>main</code> → a Action de deploy leva a versão para o ar.</p></li>
+        <li><h3 data-i18n="release.p5.titulo">5. Marcar</h3><p data-i18n-html="release.p5.texto">Uma tag <code>v1.1.0</code> e um GitHub Release são criados automaticamente a partir do <code>CHANGELOG</code>.</p></li>
+        <li><h3 data-i18n="release.p6.titulo">6. Voltar</h3><p data-i18n-html="release.p6.texto">Back-merge de <code>main</code> para <code>develop</code>, para que a correção não se perca na próxima versão.</p></li>
       </ol>
     </section>
 
     <section id="participantes" class="container secao">
-      <h2>Participantes</h2>
-      <p class="secao-intro">
+      <h2 data-i18n="participantes.titulo">Participantes</h2>
+      <p class="secao-intro" data-i18n-html="participantes.intro">
         Mesmo padrão do repositório trunk-based: um arquivo por pessoa em
         <code>data/participantes/</code>. O que muda aqui não é o arquivo — é o caminho
         que ele percorre até chegar ao ar.
       </p>
       <div id="grade-participantes" class="grade-participantes" aria-live="polite">
-        <p class="carregando">Carregando participantes…</p>
+        <p class="carregando" data-i18n="participantes.carregando">Carregando participantes…</p>
       </div>
     </section>
 
     <section id="contribuir" class="container secao">
-      <h2>Como contribuir</h2>
+      <h2 data-i18n="contribuir.titulo">Como contribuir</h2>
       <div class="passos">
         <div class="passo">
           <span class="passo-num">1</span>
-          <h3>Saia da <code>develop</code></h3>
+          <h3 data-i18n-html="contribuir.passo1">Saia da <code>develop</code></h3>
           <pre><code>git clone https://github.com/minicurso-gitflow-trunkbased/gitflow.git
 cd gitflow
 git switch develop
@@ -166,7 +166,7 @@ git switch -c feature/seu-usuario</code></pre>
         </div>
         <div class="passo">
           <span class="passo-num">2</span>
-          <h3>Trabalhe e valide</h3>
+          <h3 data-i18n="contribuir.passo2">Trabalhe e valide</h3>
           <pre><code>cp data/participantes/_exemplo.json \
    data/participantes/seu-usuario.json
 node scripts/validar.mjs
@@ -174,14 +174,14 @@ python3 -m http.server 8000</code></pre>
         </div>
         <div class="passo">
           <span class="passo-num">3</span>
-          <h3>PR para a <code>develop</code></h3>
+          <h3 data-i18n-html="contribuir.passo3">PR para a <code>develop</code></h3>
           <pre><code>git add data/participantes/seu-usuario.json
 git commit -m "feat: adiciona participante seu-usuario"
 git push -u origin feature/seu-usuario
 # abra o PR com base em develop (nunca em main)</code></pre>
         </div>
       </div>
-      <p class="nota">
+      <p class="nota" data-i18n-html="contribuir.nota">
         Seu commit só aparece no site quando a próxima versão for publicada — e isso é
         uma característica do modelo, não um defeito. Detalhes no
         <a href="https://github.com/minicurso-gitflow-trunkbased/gitflow/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.
@@ -191,11 +191,12 @@ git push -u origin feature/seu-usuario
 
   <footer class="rodape">
     <div class="container">
-      <p>Minicurso Gitflow &amp; Trunk-Based Development — IFPR.</p>
-      <p class="rodape-meta">Publicado a partir da <code>main</code> via GitHub Actions · <span id="build-info">build local</span></p>
+      <p data-i18n="rodape.curso">Minicurso Gitflow &amp; Trunk-Based Development — IFPR.</p>
+      <p class="rodape-meta"><span data-i18n-html="rodape.publicado">Publicado a partir da <code>main</code> via GitHub Actions</span> · <span id="build-info">build local</span></p>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

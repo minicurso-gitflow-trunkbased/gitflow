@@ -48,7 +48,7 @@ async function htmls(dir) {
 for (const caminho of await htmls('.')) {
   const html = await readFile(caminho, 'utf8');
   if (!/<!DOCTYPE html>/i.test(html)) aviso(`${caminho}: falta <!DOCTYPE html>`);
-  if (!/<title>[^<]+<\/title>/i.test(html)) aviso(`${caminho}: falta <title> preenchido`);
+  if (!/<title[^>]*>[^<]+<\/title>/i.test(html)) aviso(`${caminho}: falta <title> preenchido`);
   if (!/<html[^>]+lang=/i.test(html)) aviso(`${caminho}: <html> sem atributo lang`);
 
   const base = caminho.split('/').slice(1, -1).join('/'); // caminho relativo à raiz do arquivo
