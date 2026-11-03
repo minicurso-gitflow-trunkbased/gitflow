@@ -11,11 +11,15 @@ e versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Adicionado
 
+- Página base sobre Trunk-Based Development com o card "O que é?" e botão "Saber mais".
+
 ### Corrigido
 
 ## [1.0.0] - 2026-08-25
 
 ### Adicionado
+
+- Página base sobre Trunk-Based Development com o card "O que é?" e botão "Saber mais".
 
 - Estrutura inicial do site: página do modelo Gitflow, tabela de branches e ciclo de release.
 - Lista de participantes gerada a partir de `data/participantes/`.
