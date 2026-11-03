@@ -67,6 +67,32 @@ for (const caminho of await htmls('.')) {
   }
 }
 
+// 3b. i18n: os dicionários têm as mesmas chaves do pt-BR e o HTML só usa chaves existentes.
+if (existsSync('assets/i18n/pt-BR.json')) {
+  const carregar = async (idioma) => JSON.parse(await readFile(`assets/i18n/${idioma}.json`, 'utf8'));
+  const referencia = await carregar('pt-BR');
+  for (const idioma of ['en-US', 'es-ES']) {
+    if (!existsSync(`assets/i18n/${idioma}.json`)) { aviso(`dicionário ausente: assets/i18n/${idioma}.json`); continue; }
+    const dicionario = await carregar(idioma);
+    for (const chave of Object.keys(referencia)) {
+      if (!(chave in dicionario)) aviso(`${idioma}.json: falta a chave "${chave}"`);
+    }
+    for (const chave of Object.keys(dicionario)) {
+      if (!(chave in referencia)) aviso(`${idioma}.json: chave "${chave}" não existe no pt-BR.json`);
+    }
+  }
+  for (const caminho of await htmls('.')) {
+    const html = await readFile(caminho, 'utf8');
+    const usadas = [...html.matchAll(/data-i18n(?:-html)?="([^"]+)"/g)].map((m) => m[1]);
+    for (const [, atributos] of html.matchAll(/data-i18n-attr="([^"]+)"/g)) {
+      for (const par of atributos.split(';')) usadas.push(par.split(':')[1]?.trim());
+    }
+    for (const chave of usadas) {
+      if (!(chave in referencia)) aviso(`${caminho}: chave de tradução inexistente "${chave}"`);
+    }
+  }
+}
+
 // 4. Contrato de versionamento: VERSION é semver e existe no CHANGELOG.
 if (existsSync('VERSION') && existsSync('CHANGELOG.md')) {
   const versao = (await readFile('VERSION', 'utf8')).trim();
