@@ -53,6 +53,9 @@ VERSION                       versão publicada — só muda em release/* e hotf
 CHANGELOG.md                  histórico; edite a seção "Não lançado" no seu PR
 assets/css/style.css          estilos (adicione os seus no fim do arquivo)
 assets/js/main.js             script principal, sem dependências
+assets/js/i18n.js             tradução: detecta o idioma e troca os textos
+assets/i18n/*.json            dicionários pt-BR (referência), en-US e es-ES
+assets/img/flags/*.svg        bandeiras do seletor de idioma
 data/participantes/*.json     um arquivo por pessoa  ← é aqui que você começa
 docs/gitflow.html             guia rápido do fluxo
 scripts/gerar-manifesto.mjs   junta os JSONs em data/participantes.json
@@ -63,6 +66,13 @@ scripts/notas-da-versao.mjs   extrai as notas de uma versão do CHANGELOG
 ```
 
 `data/participantes.json` e `data/build.json` são **gerados** — estão no `.gitignore`.
+
+## Traduções
+
+O texto em pt-BR fica no HTML (padrão sem JS); `assets/js/i18n.js` troca o conteúdo por `assets/i18n/<idioma>.json`.
+O idioma inicial é o do dispositivo (`navigator.languages`; `pt*`, `en*` e `es*` casam com os três suportados, qualquer outro cai em `en-US`) e a escolha no seletor do header fica salva no `localStorage`.
+
+Texto novo vai no HTML com `data-i18n="chave"` (texto), `data-i18n-html="chave"` (com `<code>`/`<em>`) ou `data-i18n-attr="atributo:chave"`, e a chave precisa existir nos **três** JSONs. O `validar.mjs` confere isso.
 
 ## Workflows
 

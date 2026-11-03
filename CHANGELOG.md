@@ -11,6 +11,8 @@ e versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Adicionado
 
+- Suporte a tradução (pt-BR, en-US e es-ES) com dicionários JSON, detecção do idioma do dispositivo e seletor com bandeiras no header.
+
 ### Corrigido
 
 ## [1.0.0] - 2026-08-25
