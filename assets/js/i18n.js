@@ -94,6 +94,114 @@
     }).catch(function () { /* mantém o texto atual (pt-BR no HTML) */ });
   }
 
+  /* ---------- seletor com bandeiras ---------- */
+  var ROTULOS = {
+    'pt-BR': { bandeira: 'br', nome: 'Português' },
+    'en-US': { bandeira: 'us', nome: 'English' },
+    'es-ES': { bandeira: 'es', nome: 'Español' }
+  };
+
+  function bandeira(idioma) {
+    var img = document.createElement('img');
+    img.src = BASE + 'img/flags/' + ROTULOS[idioma].bandeira + '.svg';
+    img.alt = '';
+    img.width = 22;
+    img.height = 16;
+    return img;
+  }
+
+  function montarSeletor() {
+    var raiz = document.getElementById('seletor-idioma');
+    if (!raiz) return;
+
+    var botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'seletor-botao';
+    botao.setAttribute('aria-haspopup', 'listbox');
+    botao.setAttribute('aria-expanded', 'false');
+
+    var lista = document.createElement('ul');
+    lista.className = 'seletor-lista';
+    lista.setAttribute('role', 'listbox');
+    lista.tabIndex = -1;
+    lista.hidden = true;
+
+    var itens = IDIOMAS.map(function (idioma) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.setAttribute('lang', idioma);
+      li.dataset.idioma = idioma;
+      li.tabIndex = -1;
+      li.appendChild(bandeira(idioma));
+      var nome = document.createElement('span');
+      nome.textContent = ROTULOS[idioma].nome;
+      li.appendChild(nome);
+      lista.appendChild(li);
+      return li;
+    });
+
+    raiz.appendChild(botao);
+    raiz.appendChild(lista);
+
+    function atualizarBotao() {
+      botao.textContent = '';
+      botao.appendChild(bandeira(atual));
+      var codigo = document.createElement('span');
+      codigo.textContent = atual.slice(0, 2).toUpperCase();
+      botao.appendChild(codigo);
+      botao.setAttribute('aria-label', t('idioma.aria', 'Idioma do site') + ': ' + ROTULOS[atual].nome);
+      itens.forEach(function (li) {
+        li.setAttribute('aria-selected', String(li.dataset.idioma === atual));
+      });
+    }
+
+    function abrir() {
+      lista.hidden = false;
+      botao.setAttribute('aria-expanded', 'true');
+      var selecionado = itens.filter(function (li) { return li.dataset.idioma === atual; })[0];
+      (selecionado || itens[0]).focus();
+    }
+
+    function fechar(devolverFoco) {
+      lista.hidden = true;
+      botao.setAttribute('aria-expanded', 'false');
+      if (devolverFoco) botao.focus();
+    }
+
+    function escolher(li) {
+      definir(li.dataset.idioma, true);
+      fechar(true);
+    }
+
+    botao.addEventListener('click', function () { lista.hidden ? abrir() : fechar(false); });
+    botao.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); abrir(); }
+    });
+
+    lista.addEventListener('click', function (e) {
+      var li = e.target.closest('li');
+      if (li) escolher(li);
+    });
+    lista.addEventListener('keydown', function (e) {
+      var i = itens.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); itens[(i + 1) % itens.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); itens[(i - 1 + itens.length) % itens.length].focus(); }
+      else if (e.key === 'Home') { e.preventDefault(); itens[0].focus(); }
+      else if (e.key === 'End') { e.preventDefault(); itens[itens.length - 1].focus(); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (i >= 0) escolher(itens[i]); }
+      else if (e.key === 'Escape') { e.preventDefault(); fechar(true); }
+      else if (e.key === 'Tab') { fechar(false); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!raiz.contains(e.target)) fechar(false);
+    });
+
+    document.addEventListener('i18n:mudou', atualizarBotao);
+    atualizarBotao();
+  }
+
+  montarSeletor();
+
   window.i18n = {
     IDIOMAS: IDIOMAS,
     t: t,
