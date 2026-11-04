@@ -107,6 +107,39 @@
             </div>
         </section>
 
+        <section class="container secao">
+            <h2>A anatomia da segurança</h2>
+            <p class="secao-intro">
+                Veja como cada etapa do fluxo funciona como uma barreira de proteção entre a escrita de
+                uma linha de código e a publicação em produção:
+            </p>
+        
+            <ol class="linha-tempo">
+                <li>
+                    <h3>Experimentação livre na <code>feature/*</code></h3>
+                    <p>O desenvolvedor pode errar, refazer e testar à vontade sem nenhum risco para a base
+                        compartilhada ou para os usuários finais.</p>
+                </li>
+                <li>
+                    <h3>Integração revisada na <code>develop</code></h3>
+                    <p>O merge acontece via Pull Request com revisão de código, reunindo as funcionalidades
+                        prontas em um ambiente de integração antes de qualquer publicação.</p>
+                </li>
+                <li>
+                    <h3>Estabilização na <code>release/*</code></h3>
+                    <p>Com o escopo congelado, o time foca apenas em testes e correções, prepara o
+                        <code>VERSION</code> e documenta tudo no <code>CHANGELOG.md</code>.
+                    </p>
+                </li>
+                <li>
+                    <h3>Publicação versionada na <code>main</code></h3>
+                    <p>O merge final gera uma tag imutável, permitindo identificar exatamente o que está em
+                        produção e reconstruir qualquer versão anterior quando necessário.</p>
+                </li>
+            </ol>
+        </section>
+
+
         <section id="custos" class="container secao">
             <h2>Os 6 principais pontos de dor</h2>
             <p class="secao-intro">
