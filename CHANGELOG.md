@@ -9,6 +9,8 @@ e versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 ## [Não lançado]
 
+- Página sobre as desvantagens do Gitflow em docs/desvantagens.html.
+
 ### Adicionado
 
 - Seção "O que é o Gitflow" na página inicial, depois de "Como contribuir".
