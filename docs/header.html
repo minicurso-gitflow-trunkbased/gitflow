@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitFlow</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #f5f5f7;
+        }
+
+        header {
+            width: 92%;
+            max-width: 1400px;
+            height: 76px;
+            margin: 25px auto;
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 22px;
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #171717;
+            letter-spacing: -1.5px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #7357f5;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #7357f5;
+        }
+
+        .btn {
+            text-decoration: none;
+            background: #7357f5;
+            color: white;
+            padding: 13px 23px;
+            border-radius: 13px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #5c40d8;
+            transform: translateY(-2px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 700px) {
+            header {
+                padding: 0 18px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="#" class="logo">NOVA<span>.</span></a>
+
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">O que é</a>
+            <a href="#">Desvantagens</a>
+            <a href="#">Projetos</a>
+            <a href="#">Contato</a>
+        </nav>
+
+        <a href="#" class="btn">Começar agora ↗</a>
+    </header>
+
+</body>
+
+</html>
