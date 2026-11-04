@@ -187,6 +187,36 @@ git push -u origin feature/seu-usuario
         <a href="https://github.com/minicurso-gitflow-trunkbased/gitflow/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.
       </p>
     </section>
+
+    <section id="o-que-e" class="container secao">
+      <h2>O que é o Gitflow</h2>
+      <p class="secao-intro">
+        Gitflow é um modelo de ramificação para Git. Em vez de um único ramo
+        compartilhado, ele organiza o trabalho em <strong>cinco tipos de branch</strong>,
+        cada um com um papel bem definido — e com regras claras sobre de onde cada um
+        nasce e para onde volta.
+      </p>
+      <div class="passos">
+        <div class="passo">
+          <h3>Duas branches permanentes</h3>
+          <p><code>main</code> só recebe código liberado: cada merge é uma versão.
+            <code>develop</code> é a linha de integração do time, onde a próxima versão
+            vai se formando.</p>
+        </div>
+        <div class="passo">
+          <h3>Três branches temporárias</h3>
+          <p><code>feature/*</code> carrega uma funcionalidade.
+            <code>release/*</code> congela o escopo para estabilizar e testar.
+            <code>hotfix/*</code> é a correção urgente que sai direto da <code>main</code>.</p>
+        </div>
+        <div class="passo">
+          <h3>Integração no fim</h3>
+          <p>O código inacabado fica na própria branch. Ele só se junta ao trabalho dos
+            outros quando a funcionalidade termina — e só chega ao usuário no próximo
+            release.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="rodape">
