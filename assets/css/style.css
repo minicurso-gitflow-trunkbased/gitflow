@@ -202,6 +202,41 @@ pre code { background: none; padding: 0; }
    ↓↓↓ ADICIONE SEUS ESTILOS ABAIXO DESTA LINHA ↓↓↓
    ========================================================= */
 
+/* ---------- rodapé expandido ---------- */
+.rodape-conteudo {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  gap: 1.5rem 3rem;
+  padding: 2.5rem 0;
+}
+.rodape-marca .marca { display: inline-block; margin-bottom: .45rem; }
+.rodape-marca p { max-width: 32ch; margin: 0; }
+.rodape-links {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: .75rem 1.25rem;
+  flex-wrap: wrap;
+  max-width: 420px;
+}
+.rodape-links a { color: var(--texto-suave); font-size: .9rem; text-decoration: none; }
+.rodape-links a:hover { color: var(--acento); text-decoration: underline; }
+.rodape-base {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--borda);
+}
+
+@media (max-width: 640px) {
+  .rodape-conteudo { grid-template-columns: 1fr; gap: 1.25rem; }
+  .rodape-links { justify-content: flex-start; }
+  .rodape-base { display: block; }
+  .rodape-base .rodape-meta { margin-top: .5rem; }
+}
+
 /* Botão flutuante */
 .botao-acessibilidade {
     position: fixed;
