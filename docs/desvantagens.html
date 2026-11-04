@@ -21,6 +21,7 @@
             <ul class="nav-links">
                 <li><a href="../index.html">Início</a></li>
                 <li><a href="gitflow.html">Guia do fluxo</a></li>
+                <li><a href="#beneficios">Benefícios</a></li>
                 <li><a href="#custos">Custos</a></li>
                 <li><a href="#comparacao">Comparação</a></li>
                 <li><a href="#quando-evitar">Quando evitar</a></li>
@@ -35,11 +36,75 @@
             <p class="etiqueta">Análise crítica</p>
             <h1>Vantagens e desvantagens do Gitflow</h1>
             <p class="subtitulo">
-                Controle e previsibilidade têm preço. Veja o que o Gitflow entrega de melhor
-                organização, releases rastreáveis e uma produção protegida e por que o excesso de
+                Controle e previsibilidade têm preço. Veja o que o Gitflow entrega de melhor —
+                organização, releases rastreáveis e uma produção protegida — e por que o excesso de
                 branches, cerimônias de release e integrações tardias o tornam um gargalo para
                 times que buscam entrega contínua.
             </p>
+        </section>
+
+        <section id="beneficios" class="container secao">
+            <h2>Os 6 principais benefícios</h2>
+            <p class="secao-intro">
+                Antes de olhar para os custos, vale reconhecer por que o Gitflow se tornou tão popular.
+                Abaixo estão os ganhos clássicos que esse modelo oferece às equipes.
+            </p>
+
+            <div class="cartoes">
+                <article class="cartao">
+                    <h3>1. Produção sempre estável</h3>
+                    <p>
+                        A <code>main</code> só recebe código que passou pela <code>develop</code> e foi
+                        estabilizado em uma <code>release/*</code>. Cada commit nela representa uma versão
+                        pronta para ser publicada.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>2. Papéis claros para cada branch</h3>
+                    <p>
+                        Todo tipo de trabalho tem seu lugar: <code>feature/*</code> para novidades,
+                        <code>release/*</code> para preparar versões e <code>hotfix/*</code> para
+                        emergências. Qualquer pessoa sabe onde cada mudança está.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>3. Versionamento e histórico rastreáveis</h3>
+                    <p>
+                        Cada release gera uma tag, atualiza o <code>VERSION</code> e fecha o
+                        <code>CHANGELOG.md</code>. Fica fácil responder "o que entrou na v1.4.0?" ou voltar
+                        para uma versão específica.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>4. Desenvolvimento paralelo isolado</h3>
+                    <p>
+                        Várias funcionalidades avançam ao mesmo tempo em branches separadas. Uma
+                        <code>feature/*</code> incompleta ou instável não atrapalha o trabalho do restante
+                        do time.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>5. Hotfix sem carregar trabalho inacabado</h3>
+                    <p>
+                        Como a <code>hotfix/*</code> nasce da <code>main</code>, a correção emergencial vai
+                        para o ar sem arrastar junto as funcionalidades ainda em teste na
+                        <code>develop</code>.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>6. Pontos naturais de revisão e homologação</h3>
+                    <p>
+                        A <code>release/*</code> cria uma janela dedicada para QA, testes de aceitação e
+                        aprovação formal antes da publicação — algo valioso em ambientes regulados ou
+                        auditados.
+                    </p>
+                </article>
+            </div>
         </section>
 
         <section id="custos" class="container secao">
