@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desvantagens do Gitflow — Minicurso Gitflow</title>
+    <title>Vantagens e desvantagens do Gitflow — Minicurso Gitflow</title>
     <meta name="description"
-        content="Análise das desvantagens, custos operacionais e armadilhas do modelo Gitflow em comparação ao Trunk-Based Development.">
+        content="Análise das vantagens, desvantagens, custos operacionais e armadilhas do modelo Gitflow em comparação ao Trunk-Based Development.">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⑂</text></svg>">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -33,10 +33,11 @@
     <main id="conteudo">
         <section class="container hero">
             <p class="etiqueta">Análise crítica</p>
-            <h1>As desvantagens do Gitflow</h1>
+            <h1>Vantagens e desvantagens do Gitflow</h1>
             <p class="subtitulo">
-                Controle e previsibilidade têm preço. Entenda por que o excesso de branches,
-                cerimônias de release e integrações tardias tornam o Gitflow um gargalo para
+                Controle e previsibilidade têm preço. Veja o que o Gitflow entrega de melhor
+                organização, releases rastreáveis e uma produção protegida e por que o excesso de
+                branches, cerimônias de release e integrações tardias o tornam um gargalo para
                 times que buscam entrega contínua.
             </p>
         </section>
@@ -126,13 +127,15 @@
                 <li>
                     <h3>Congelamento de escopo na <code>release/*</code></h3>
                     <p>O time precisa coordenar uma parada para preparar <code>VERSION</code>, fechar o
-                        <code>CHANGELOG.md</code> e testar um pacote grande de mudanças acumuladas.</p>
+                        <code>CHANGELOG.md</code> e testar um pacote grande de mudanças acumuladas.
+                    </p>
                 </li>
                 <li>
                     <h3>Sincronização dupla no Hotfix</h3>
                     <p>Uma emergência em produção exige criar <code>hotfix/*</code> a partir da <code>main</code>,
                         incrementar o patch e gerenciar dois merges distintos (<code>main</code> e
-                        <code>develop</code>).</p>
+                        <code>develop</code>).
+                    </p>
                 </li>
             </ol>
         </section>
@@ -161,7 +164,8 @@
                         <tr>
                             <td><strong>Caminho até produção</strong></td>
                             <td><code>feature/*</code> → <code>develop</code> → <code>release/*</code> →
-                                <code>main</code></td>
+                                <code>main</code>
+                            </td>
                             <td>Commit direto ou PR curto para <code>main</code></td>
                         </tr>
                         <tr>
