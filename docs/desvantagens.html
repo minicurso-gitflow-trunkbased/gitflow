@@ -13,10 +13,10 @@
 </head>
 
 <body>
-    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <a class="skip-link" href="#conteudo" data-i18n="skip">Pular para o conteúdo</a>
 
     <header class="topo">
-        <nav class="nav container" aria-label="Navegação principal">
+        <nav class="nav container" aria-label="Navegação principal" data-i18n-attr="aria-label:nav.aria">
             <a class="marca" href="../index.html">⑂ <strong>Minicurso</strong> Gitflow</a>
             <ul class="nav-links">
                 <li><a href="../index.html">Início</a></li>
@@ -26,8 +26,9 @@
                 <li><a href="#comparacao">Comparação</a></li>
                 <li><a href="#quando-evitar">Quando evitar</a></li>
             </ul>
+            <div id="seletor-idioma" class="seletor-idioma"></div>
             <button id="alternar-tema" class="botao-tema" type="button"
-                aria-label="Alternar tema claro/escuro">◐</button>
+                aria-label="Alternar tema claro/escuro" data-i18n-attr="aria-label:tema.aria">◐</button>
         </nav>
     </header>
 
@@ -141,16 +142,16 @@
 
 
         <section id="custos" class="container secao">
-            <h2>Os 6 principais pontos de dor</h2>
-            <p class="secao-intro">
+            <h2 data-i18n="desv.custos.titulo">Os 6 principais pontos de dor</h2>
+            <p class="secao-intro" data-i18n="desv.custos.intro">
                 Durante o laboratório, você sentiu na prática o esforço extra exigido para colocar
                 uma simples alteração no ar. Abaixo estão os problemas clássicos desse modelo.
             </p>
 
             <div class="cartoes">
                 <article class="cartao">
-                    <h3>1. Alto tempo de entrega (Lead Time)</h3>
-                    <p>
+                    <h3 data-i18n="desv.c1.t">1. Alto tempo de entrega (Lead Time)</h3>
+                    <p data-i18n-html="desv.c1.p">
                         Uma mudança pronta na <code>feature/*</code> não vai para o ar quando termina: ela
                         fica retida na <code>develop</code> esperando a abertura e estabilização da próxima
                         <code>release/*</code>.
@@ -158,8 +159,8 @@
                 </article>
 
                 <article class="cartao">
-                    <h3>2. Conflitos severos (Merge Hell)</h3>
-                    <p>
+                    <h3 data-i18n="desv.c2.t">2. Conflitos severos (Merge Hell)</h3>
+                    <p data-i18n-html="desv.c2.p">
                         Branches que duram dias ou semanas divergem silenciosamente. Quando todo o time
                         tenta integrar na <code>develop</code> ou atualizar o <code>CHANGELOG.md</code>, os
                         conflitos são maiores e mais complexos.
@@ -167,8 +168,8 @@
                 </article>
 
                 <article class="cartao">
-                    <h3>3. Burocracia no ciclo de release</h3>
-                    <p>
+                    <h3 data-i18n="desv.c3.t">3. Burocracia no ciclo de release</h3>
+                    <p data-i18n-html="desv.c3.p">
                         Publicar exige congelar escopo, criar branch <code>release/*</code>, rodar scripts de
                         versão, aprovar PR para a <code>main</code>, gerar tag e ainda fazer o back-merge
                         para a <code>develop</code>.
@@ -176,8 +177,8 @@
                 </article>
 
                 <article class="cartao">
-                    <h3>4. Risco de esquecer o back-merge</h3>
-                    <p>
+                    <h3 data-i18n="desv.c4.t">4. Risco de esquecer o back-merge</h3>
+                    <p data-i18n-html="desv.c4.p">
                         Correções feitas em <code>release/*</code> ou <code>hotfix/*</code> precisam voltar
                         obrigatoriamente para a <code>develop</code>. Sem automação, é comum esquecer esse
                         passo e reintroduzir o bug na versão seguinte.
@@ -185,8 +186,8 @@
                 </article>
 
                 <article class="cartao">
-                    <h3>5. Sobrecarga cognitiva</h3>
-                    <p>
+                    <h3 data-i18n="desv.c5.t">5. Sobrecarga cognitiva</h3>
+                    <p data-i18n-html="desv.c5.p">
                         Iniciantes frequentemente abrem Pull Requests mirando a branch errada
                         (ex.: <code>feature/*</code> direto para a <code>main</code>) ou esquecem de
                         qual base cada tipo de branch deve nascer.
@@ -194,8 +195,8 @@
                 </article>
 
                 <article class="cartao">
-                    <h3>6. Barreira para CI/CD real</h3>
-                    <p>
+                    <h3 data-i18n="desv.c6.t">6. Barreira para CI/CD real</h3>
+                    <p data-i18n="desv.c6.p">
                         A Integração Contínua pressupõe integrar código no tronco principal várias vezes ao
                         dia. Com múltiplas camadas de branches permanentes, o feedback real de produção é
                         sempre adiado.
@@ -205,21 +206,21 @@
         </section>
 
         <section class="container secao">
-            <h2>A anatomia do atraso</h2>
-            <p class="secao-intro">
+            <h2 data-i18n="desv.anatomia.titulo">A anatomia do atraso</h2>
+            <p class="secao-intro" data-i18n="desv.anatomia.intro">
                 Veja onde o tempo e o esforço da equipe são consumidos entre a escrita de uma linha
                 de código e a publicação em produção:
             </p>
 
             <ol class="linha-tempo">
                 <li>
-                    <h3>Isolamento prolongado na <code>feature/*</code></h3>
-                    <p>Enquanto a branch vive separada, o restante da equipe altera a base na <code>develop</code> sem
+                    <h3 data-i18n-html="desv.a1.t">Isolamento prolongado na <code>feature/*</code></h3>
+                    <p data-i18n-html="desv.a1.p">Enquanto a branch vive separada, o restante da equipe altera a base na <code>develop</code> sem
                         que os conflitos apareçam imediatamente.</p>
                 </li>
                 <li>
-                    <h3>Fila de espera na <code>develop</code></h3>
-                    <p>Mesmo após revisão e merge do PR, a funcionalidade fica acumulada em um ambiente intermediário,
+                    <h3 data-i18n-html="desv.a2.t">Fila de espera na <code>develop</code></h3>
+                    <p data-i18n="desv.a2.p">Mesmo após revisão e merge do PR, a funcionalidade fica acumulada em um ambiente intermediário,
                         sem gerar valor para o usuário final.</p>
                 </li>
                 <li>
@@ -229,8 +230,8 @@
                     </p>
                 </li>
                 <li>
-                    <h3>Sincronização dupla no Hotfix</h3>
-                    <p>Uma emergência em produção exige criar <code>hotfix/*</code> a partir da <code>main</code>,
+                    <h3 data-i18n="desv.a4.t">Sincronização dupla no Hotfix</h3>
+                    <p data-i18n-html="desv.a4.p">Uma emergência em produção exige criar <code>hotfix/*</code> a partir da <code>main</code>,
                         incrementar o patch e gerenciar dois merges distintos (<code>main</code> e
                         <code>develop</code>).
                     </p>
@@ -239,8 +240,8 @@
         </section>
 
         <section id="comparacao" class="container secao">
-            <h2>Gitflow vs. Trunk-Based na prática</h2>
-            <p class="secao-intro">
+            <h2 data-i18n="desv.comp.titulo">Gitflow vs. Trunk-Based na prática</h2>
+            <p class="secao-intro" data-i18n="desv.comp.intro">
                 Comparativo direto do custo operacional que você experimentou nos dois repositórios do minicurso:
             </p>
 
@@ -248,16 +249,16 @@
                 <table class="tabela-branches">
                     <thead>
                         <tr>
-                            <th>Critério</th>
-                            <th>Gitflow (este repositório)</th>
-                            <th>Trunk-Based Development</th>
+                            <th data-i18n="desv.comp.th1">Critério</th>
+                            <th data-i18n="desv.comp.th2">Gitflow (este repositório)</th>
+                            <th data-i18n="desv.comp.th3">Trunk-Based Development</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Branches fixas</strong></td>
-                            <td>2 (<code>main</code> e <code>develop</code>)</td>
-                            <td>1 (apenas <code>main</code>)</td>
+                            <td><strong data-i18n="desv.comp.r1">Branches fixas</strong></td>
+                            <td data-i18n-html="desv.comp.r1.g">2 (<code>main</code> e <code>develop</code>)</td>
+                            <td data-i18n-html="desv.comp.r1.t">1 (apenas <code>main</code>)</td>
                         </tr>
                         <tr>
                             <td><strong>Caminho até produção</strong></td>
@@ -267,19 +268,19 @@
                             <td>Commit direto ou PR curto para <code>main</code></td>
                         </tr>
                         <tr>
-                            <td><strong>Correção de emergência</strong></td>
-                            <td>Branch <code>hotfix/*</code> + bump de versão + merge duplo</td>
-                            <td><code>git revert</code> ou fix rápido direto na <code>main</code></td>
+                            <td><strong data-i18n="desv.comp.r3">Correção de emergência</strong></td>
+                            <td data-i18n-html="desv.comp.r3.g">Branch <code>hotfix/*</code> + bump de versão + merge duplo</td>
+                            <td data-i18n-html="desv.comp.r3.t"><code>git revert</code> ou fix rápido direto na <code>main</code></td>
                         </tr>
                         <tr>
-                            <td><strong>Tamanho dos conflitos</strong></td>
-                            <td>Grandes e tardios (branches longas)</td>
-                            <td>Pequenos e imediatos (integração contínua)</td>
+                            <td><strong data-i18n="desv.comp.r4">Tamanho dos conflitos</strong></td>
+                            <td data-i18n="desv.comp.r4.g">Grandes e tardios (branches longas)</td>
+                            <td data-i18n="desv.comp.r4.t">Pequenos e imediatos (integração contínua)</td>
                         </tr>
                         <tr>
-                            <td><strong>Deploy</strong></td>
-                            <td>Em lotes (janelas de release agendadas)</td>
-                            <td>Contínuo (a cada mudança integrada)</td>
+                            <td><strong data-i18n="desv.comp.r5">Deploy</strong></td>
+                            <td data-i18n="desv.comp.r5.g">Em lotes (janelas de release agendadas)</td>
+                            <td data-i18n="desv.comp.r5.t">Contínuo (a cada mudança integrada)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -287,56 +288,57 @@
         </section>
 
         <section id="quando-evitar" class="container secao">
-            <h2>Quando evitar (e quando ainda usar)</h2>
-            <p class="secao-intro">
+            <h2 data-i18n="desv.evitar.titulo">Quando evitar (e quando ainda usar)</h2>
+            <p class="secao-intro" data-i18n="desv.evitar.intro">
                 O próprio criador do Gitflow, Vincent Driessen, adicionou uma nota anos depois
                 recomendando fluxos baseados em tronco para aplicações web modernas com entrega contínua.
             </p>
 
             <div class="cartoes">
                 <article class="cartao">
-                    <h3>Evite o Gitflow se…</h3>
+                    <h3 data-i18n="desv.evitar.nao.t">Evite o Gitflow se…</h3>
                     <ul class="lista-marcada">
-                        <li class="nao">Seu produto é uma aplicação web ou SaaS com apenas uma versão ativa em produção.
+                        <li class="nao" data-i18n="desv.evitar.nao1">Seu produto é uma aplicação web ou SaaS com apenas uma versão ativa em produção.
                         </li>
-                        <li class="nao">Sua equipe pratica Integração Contínua (CI) e Entrega Contínua (CD) diariamente.
+                        <li class="nao" data-i18n="desv.evitar.nao2">Sua equipe pratica Integração Contínua (CI) e Entrega Contínua (CD) diariamente.
                         </li>
-                        <li class="nao">O time é pequeno e a cerimônia de release consome mais tempo que o
+                        <li class="nao" data-i18n="desv.evitar.nao3">O time é pequeno e a cerimônia de release consome mais tempo que o
                             desenvolvimento.</li>
-                        <li class="nao">Você precisa validar hipóteses e corrigir problemas em produção em poucos
+                        <li class="nao" data-i18n="desv.evitar.nao4">Você precisa validar hipóteses e corrigir problemas em produção em poucos
                             minutos.</li>
                     </ul>
                 </article>
 
                 <article class="cartao destaque">
-                    <h3>O Gitflow ainda faz sentido se…</h3>
+                    <h3 data-i18n="desv.evitar.ok.t">O Gitflow ainda faz sentido se…</h3>
                     <ul class="lista-marcada">
-                        <li class="ok">Você distribui software empacotado (apps mobile com revisão de loja, desktop,
+                        <li class="ok" data-i18n="desv.evitar.ok1">Você distribui software empacotado (apps mobile com revisão de loja, desktop,
                             firmware).</li>
-                        <li class="ok">É obrigatório manter e dar suporte a múltiplas versões antigas simultaneamente
+                        <li class="ok" data-i18n="desv.evitar.ok2">É obrigatório manter e dar suporte a múltiplas versões antigas simultaneamente
                             (v1.x, v2.x).</li>
-                        <li class="ok">O projeto exige auditoria formal, janelas rígidas de homologação e aprovação
+                        <li class="ok" data-i18n="desv.evitar.ok3">O projeto exige auditoria formal, janelas rígidas de homologação e aprovação
                             manual de releases.</li>
-                        <li class="ok">O repositório é aberto com dezenas de contribuidores sem contexto prévio do
+                        <li class="ok" data-i18n="desv.evitar.ok4">O repositório é aberto com dezenas de contribuidores sem contexto prévio do
                             projeto.</li>
                     </ul>
                 </article>
             </div>
 
             <p class="nota">
-                <a href="../index.html">← Voltar para a página inicial</a> ·
-                <a href="gitflow.html">Ver o guia rápido de comandos →</a>
+                <a href="../index.html" data-i18n="desv.nota.voltar">← Voltar para a página inicial</a> ·
+                <a href="gitflow.html" data-i18n="desv.nota.guia">Ver o guia rápido de comandos →</a>
             </p>
         </section>
     </main>
 
     <footer class="rodape">
         <div class="container">
-            <p>Minicurso Gitflow &amp; Trunk-Based Development — IFPR.</p>
-            <p class="rodape-meta">Publicado a partir da <code>main</code> via GitHub Actions</p>
+            <p data-i18n="rodape.curso">Minicurso Gitflow &amp; Trunk-Based Development — IFPR.</p>
+            <p class="rodape-meta" data-i18n-html="rodape.publicado">Publicado a partir da <code>main</code> via GitHub Actions</p>
         </div>
     </footer>
 
+    <script src="../assets/js/i18n.js"></script>
     <script src="../assets/js/main.js"></script>
 </body>
 

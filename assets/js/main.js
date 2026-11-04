@@ -5,6 +5,11 @@
 (function () {
   'use strict';
 
+  // i18n.js é carregado antes; o fallback mantém o pt-BR se ele falhar.
+  function t(chave, padrao) {
+    return window.i18n ? window.i18n.t(chave, padrao) : padrao;
+  }
+
   /* ---------- tema claro/escuro ---------- */
   var CHAVE_TEMA = 'minicurso:tema';
 
@@ -51,7 +56,7 @@
     artigo.appendChild(avatar);
 
     var titulo = document.createElement('h3');
-    titulo.textContent = p.nome || 'Sem nome';
+    titulo.textContent = p.nome || t('participantes.semNome', 'Sem nome');
     artigo.appendChild(titulo);
 
     if (p.github) {
@@ -73,12 +78,18 @@
     return artigo;
   }
 
+  // Guardados para redesenhar a grade quando o idioma muda.
+  var ultimaLista = null;
+  var carregouComErro = false;
+
   function renderizar(lista) {
+    ultimaLista = lista;
+    carregouComErro = false;
     grade.innerHTML = '';
     if (!lista.length) {
       var vazio = document.createElement('p');
       vazio.className = 'vazio';
-      vazio.textContent = 'Ninguém por aqui ainda — seja a primeira pessoa a adicionar um arquivo em data/participantes/.';
+      vazio.textContent = t('participantes.vazio', 'Ninguém por aqui ainda — seja a primeira pessoa a adicionar um arquivo em data/participantes/.');
       grade.appendChild(vazio);
       return;
     }
@@ -90,11 +101,12 @@
     if (metrica) metrica.textContent = String(lista.length);
   }
 
-  function erro(mensagem) {
+  function erro() {
+    carregouComErro = true;
     grade.innerHTML = '';
     var p = document.createElement('p');
     p.className = 'vazio';
-    p.textContent = mensagem;
+    p.textContent = t('participantes.erro', 'Não foi possível carregar a lista. Rode "node scripts/gerar-manifesto.mjs" e sirva a pasta com um servidor HTTP local.');
     grade.appendChild(p);
   }
 
@@ -108,7 +120,7 @@
         renderizar(Array.isArray(dados) ? dados : (dados.participantes || []));
       })
       .catch(function () {
-        erro('Não foi possível carregar a lista. Rode "node scripts/gerar-manifesto.mjs" e sirva a pasta com um servidor HTTP local.');
+        erro();
       });
   }
 
@@ -117,6 +129,7 @@
   // dentro de uma branch release/* ou hotfix/*. É o contrato do Gitflow:
   // a versão é uma decisão explícita, não o hash do último commit.
   var seloVersao = document.getElementById('versao');
+  var versaoFalhou = false;
   if (seloVersao) {
     fetch('VERSION', { cache: 'no-cache' })
       .then(function (r) {
@@ -124,19 +137,173 @@
         return r.text();
       })
       .then(function (texto) { seloVersao.textContent = 'v' + texto.trim(); })
-      .catch(function () { seloVersao.textContent = 'desconhecida'; });
+      .catch(function () {
+        versaoFalhou = true;
+        seloVersao.textContent = t('versao.desconhecida', 'desconhecida');
+      });
   }
 
   /* ---------- informação de build ---------- */
   var infoBuild = document.getElementById('build-info');
+  var build = null;
+  function textoBuild() {
+    return t('build.commit', 'commit') + ' ' + build.commit.slice(0, 7) + ' · ' + build.data;
+  }
   if (infoBuild) {
     fetch('data/build.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (b) {
         if (b && b.commit) {
-          infoBuild.textContent = 'commit ' + b.commit.slice(0, 7) + ' · ' + b.data;
+          build = b;
+          // Passa a ser texto dinâmico: o i18n não deve sobrescrevê-lo com "build local".
+          infoBuild.removeAttribute('data-i18n');
+          infoBuild.textContent = textoBuild();
         }
       })
       .catch(function () { /* build local, mantém o texto padrão */ });
   }
+
+  /* ---------- troca de idioma ---------- */
+  // Só o que é gerado por JS precisa ser refeito; o resto o i18n.js já traduziu.
+  document.addEventListener('i18n:mudou', function () {
+    if (grade) {
+      if (carregouComErro) erro();
+      else if (ultimaLista) renderizar(ultimaLista);
+    }
+    if (seloVersao && versaoFalhou) seloVersao.textContent = t('versao.desconhecida', 'desconhecida');
+    if (infoBuild && build) infoBuild.textContent = textoBuild();
+  });
 })();
+
+
+const drawer = document.getElementById('drawer-acessibilidade');
+const overlay = document.getElementById('overlay-acessibilidade');
+
+const botaoAbrir = document.getElementById('abrir-acessibilidade');
+const botaoFechar = document.getElementById('fechar-acessibilidade');
+
+const html = document.documentElement;
+
+// Configurações
+const configuracoesPadrao = {
+    fonte: 100,
+    espacamento: 0
+};
+
+let configuracoes = { ...configuracoesPadrao };
+
+// Recuperar preferências salvas
+const preferenciasSalvas = localStorage.getItem('acessibilidade');
+
+if (preferenciasSalvas) {
+    try {
+        const dados = JSON.parse(preferenciasSalvas);
+
+        if (
+            Number.isFinite(dados.fonte) &&
+            Number.isFinite(dados.espacamento)
+        ) {
+            configuracoes.fonte = Math.min(150, Math.max(80, dados.fonte));
+            configuracoes.espacamento = Math.min(5, Math.max(0, dados.espacamento));
+        }
+    } catch (erro) {
+        localStorage.removeItem('acessibilidade');
+    }
+}
+
+// Abrir drawer
+function abrirDrawer() {
+    drawer.classList.add('aberto');
+    overlay.hidden = false;
+
+    drawer.inert = false;
+    drawer.setAttribute('aria-hidden', 'false');
+
+    botaoAbrir.setAttribute('aria-expanded', 'true');
+
+    botaoFechar.focus();
+}
+
+// Fechar drawer
+function fecharDrawer() {
+    drawer.classList.remove('aberto');
+
+    overlay.hidden = true;
+
+    drawer.inert = true;
+    drawer.setAttribute('aria-hidden', 'true');
+
+    botaoAbrir.setAttribute('aria-expanded', 'false');
+
+    botaoAbrir.focus();
+}
+
+botaoAbrir.addEventListener('click', abrirDrawer);
+botaoFechar.addEventListener('click', fecharDrawer);
+overlay.addEventListener('click', fecharDrawer);
+
+// Fechar com ESC
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && drawer.classList.contains('aberto')) {
+        fecharDrawer();
+    }
+});
+
+// Aplicar configurações
+function aplicarConfiguracoes() {
+    html.style.fontSize = configuracoes.fonte + '%';
+
+    html.style.letterSpacing = configuracoes.espacamento + 'px';
+
+    document.getElementById('valor-fonte').textContent =
+        configuracoes.fonte + '%';
+
+    document.getElementById('valor-espacamento').textContent =
+        configuracoes.espacamento + 'px';
+
+    localStorage.setItem(
+        'acessibilidade',
+        JSON.stringify(configuracoes)
+    );
+}
+
+// Aumentar fonte
+document.getElementById('aumentar-fonte').addEventListener('click', function () {
+    if (configuracoes.fonte < 150) {
+        configuracoes.fonte += 10;
+        aplicarConfiguracoes();
+    }
+});
+
+// Diminuir fonte
+document.getElementById('diminuir-fonte').addEventListener('click', function () {
+    if (configuracoes.fonte > 80) {
+        configuracoes.fonte -= 10;
+        aplicarConfiguracoes();
+    }
+});
+
+// Aumentar espaçamento
+document.getElementById('aumentar-espacamento').addEventListener('click', function () {
+    if (configuracoes.espacamento < 5) {
+        configuracoes.espacamento += 0.5;
+        aplicarConfiguracoes();
+    }
+});
+
+// Diminuir espaçamento
+document.getElementById('diminuir-espacamento').addEventListener('click', function () {
+    if (configuracoes.espacamento > 0) {
+        configuracoes.espacamento -= 0.5;
+        aplicarConfiguracoes();
+    }
+});
+
+// Restaurar configurações
+document.getElementById('restaurar-acessibilidade').addEventListener('click', function () {
+    configuracoes = { ...configuracoesPadrao };
+    aplicarConfiguracoes();
+});
+
+// Aplicar preferências ao carregar a página
+aplicarConfiguracoes();
