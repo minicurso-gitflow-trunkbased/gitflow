@@ -13,6 +13,7 @@ e versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 - Página sobre as desvantagens do Gitflow em docs/desvantagens.html.
 - Suporte a tradução (pt-BR, en-US e es-ES) com dicionários JSON, detecção do idioma do dispositivo e seletor com bandeiras no header.
+- Seção "Como o Gitflow surgiu" com a história do modelo na página inicial.
 
 ### Corrigido
 
