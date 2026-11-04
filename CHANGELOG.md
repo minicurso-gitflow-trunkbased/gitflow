@@ -11,6 +11,8 @@ e versionamento [SemVer](https://semver.org/lang/pt-BR/).
 
 ### Adicionado
 
+- Seção "O que é o Gitflow" na página inicial, depois de "Como contribuir".
+
 ### Corrigido
 
 ## [1.0.0] - 2026-08-25
