@@ -174,3 +174,136 @@
     if (infoBuild && build) infoBuild.textContent = textoBuild();
   });
 })();
+
+
+const drawer = document.getElementById('drawer-acessibilidade');
+const overlay = document.getElementById('overlay-acessibilidade');
+
+const botaoAbrir = document.getElementById('abrir-acessibilidade');
+const botaoFechar = document.getElementById('fechar-acessibilidade');
+
+const html = document.documentElement;
+
+// Configurações
+const configuracoesPadrao = {
+    fonte: 100,
+    espacamento: 0
+};
+
+let configuracoes = { ...configuracoesPadrao };
+
+// Recuperar preferências salvas
+const preferenciasSalvas = localStorage.getItem('acessibilidade');
+
+if (preferenciasSalvas) {
+    try {
+        const dados = JSON.parse(preferenciasSalvas);
+
+        if (
+            Number.isFinite(dados.fonte) &&
+            Number.isFinite(dados.espacamento)
+        ) {
+            configuracoes.fonte = Math.min(150, Math.max(80, dados.fonte));
+            configuracoes.espacamento = Math.min(5, Math.max(0, dados.espacamento));
+        }
+    } catch (erro) {
+        localStorage.removeItem('acessibilidade');
+    }
+}
+
+// Abrir drawer
+function abrirDrawer() {
+    drawer.classList.add('aberto');
+    overlay.hidden = false;
+
+    drawer.inert = false;
+    drawer.setAttribute('aria-hidden', 'false');
+
+    botaoAbrir.setAttribute('aria-expanded', 'true');
+
+    botaoFechar.focus();
+}
+
+// Fechar drawer
+function fecharDrawer() {
+    drawer.classList.remove('aberto');
+
+    overlay.hidden = true;
+
+    drawer.inert = true;
+    drawer.setAttribute('aria-hidden', 'true');
+
+    botaoAbrir.setAttribute('aria-expanded', 'false');
+
+    botaoAbrir.focus();
+}
+
+botaoAbrir.addEventListener('click', abrirDrawer);
+botaoFechar.addEventListener('click', fecharDrawer);
+overlay.addEventListener('click', fecharDrawer);
+
+// Fechar com ESC
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && drawer.classList.contains('aberto')) {
+        fecharDrawer();
+    }
+});
+
+// Aplicar configurações
+function aplicarConfiguracoes() {
+    html.style.fontSize = configuracoes.fonte + '%';
+
+    html.style.letterSpacing = configuracoes.espacamento + 'px';
+
+    document.getElementById('valor-fonte').textContent =
+        configuracoes.fonte + '%';
+
+    document.getElementById('valor-espacamento').textContent =
+        configuracoes.espacamento + 'px';
+
+    localStorage.setItem(
+        'acessibilidade',
+        JSON.stringify(configuracoes)
+    );
+}
+
+// Aumentar fonte
+document.getElementById('aumentar-fonte').addEventListener('click', function () {
+    if (configuracoes.fonte < 150) {
+        configuracoes.fonte += 10;
+        aplicarConfiguracoes();
+    }
+});
+
+// Diminuir fonte
+document.getElementById('diminuir-fonte').addEventListener('click', function () {
+    if (configuracoes.fonte > 80) {
+        configuracoes.fonte -= 10;
+        aplicarConfiguracoes();
+    }
+});
+
+// Aumentar espaçamento
+document.getElementById('aumentar-espacamento').addEventListener('click', function () {
+    if (configuracoes.espacamento < 5) {
+        configuracoes.espacamento += 0.5;
+        aplicarConfiguracoes();
+    }
+});
+
+// Diminuir espaçamento
+document.getElementById('diminuir-espacamento').addEventListener('click', function () {
+    if (configuracoes.espacamento > 0) {
+        configuracoes.espacamento -= 0.5;
+        aplicarConfiguracoes();
+    }
+});
+
+// Restaurar configurações
+document.getElementById('restaurar-acessibilidade').addEventListener('click', function () {
+    configuracoes = { ...configuracoesPadrao };
+    aplicarConfiguracoes();
+});
+
+// Aplicar preferências ao carregar a página
+aplicarConfiguracoes();

@@ -1,4 +1,4 @@
-/* =========================================================
+/* ==================================================
    Minicurso Gitflow — folha de estilo base
    Convenção: variáveis em :root, componentes em blocos
    comentados. Adicione seu componente no FIM do arquivo
@@ -225,3 +225,164 @@ pre code { background: none; padding: 0; }
 .seletor-lista li:hover, .seletor-lista li:focus { background: var(--fundo-suave); outline: none; }
 .seletor-lista li[aria-selected="true"] { color: var(--acento); font-weight: 600; }
 @media (max-width: 640px) { .nav { gap: .75rem; } }
+=======
+/* Botão flutuante */
+.botao-acessibilidade {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #145da0;
+    color: #fff;
+
+    font-size: 28px;
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay */
+.overlay-acessibilidade {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.overlay-acessibilidade[hidden] {
+    display: none;
+}
+
+/* Drawer */
+.drawer-acessibilidade {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1002;
+
+    width: 320px;
+    max-width: 90%;
+    height: 100vh;
+
+    background: #fff;
+    color: #333;
+
+    box-shadow: -3px 0 15px rgba(0, 0, 0, 0.2);
+
+    transform: translateX(100%);
+    visibility: hidden;
+
+    transition: transform 0.3s ease, visibility 0.3s ease;
+}
+
+.drawer-acessibilidade.aberto {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+/* Cabeçalho */
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.drawer-header h2 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.botao-fechar {
+    border: none;
+    background: none;
+
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Conteúdo */
+.drawer-conteudo {
+    padding: 20px;
+}
+
+.controle-acessibilidade {
+    margin-bottom: 30px;
+}
+
+.controle-acessibilidade h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Botões de controle */
+.botoes-controle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.botoes-controle button {
+    width: 45px;
+    height: 40px;
+
+    border: 1px solid #145da0;
+    border-radius: 5px;
+
+    background: #fff;
+    color: #145da0;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.botoes-controle button:hover {
+    background: #145da0;
+    color: #fff;
+}
+
+.botoes-controle span {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Restaurar */
+.botao-restaurar {
+    width: 100%;
+    padding: 12px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #145da0;
+    color: #fff;
+
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.botao-restaurar:hover {
+    background: #104777;
+}
+
+/* Respeitar preferência por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .drawer-acessibilidade {
+        transition: none;
+    }
+}

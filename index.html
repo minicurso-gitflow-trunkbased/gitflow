@@ -22,6 +22,71 @@
         <li><a href="#contribuir" data-i18n="nav.contribuir">Contribuir</a></li>
       </ul>
       <div id="seletor-idioma" class="seletor-idioma"></div>
+      <!-- Botão para abrir acessibilidade -->
+      <button id="abrir-acessibilidade" class="botao-acessibilidade" aria-label="Abrir opções de acessibilidade"
+        data-i18n-attr="aria-label:a11y.abrir" aria-expanded="false" aria-controls="drawer-acessibilidade">
+        ♿
+      </button>
+
+      <!-- Fundo escuro -->
+      <div id="overlay-acessibilidade" class="overlay-acessibilidade" hidden></div>
+
+      <!-- Drawer -->
+      <aside id="drawer-acessibilidade" class="drawer-acessibilidade" role="dialog" aria-modal="true"
+        aria-labelledby="titulo-acessibilidade" aria-hidden="true" inert>
+        <div class="drawer-header">
+          <h2 id="titulo-acessibilidade" data-i18n="a11y.titulo">Acessibilidade</h2>
+
+          <button id="fechar-acessibilidade" class="botao-fechar" aria-label="Fechar painel"
+            data-i18n-attr="aria-label:a11y.fechar">
+            &times;
+          </button>
+        </div>
+
+        <div class="drawer-conteudo">
+
+          <!-- Tamanho da fonte -->
+          <section class="controle-acessibilidade">
+            <h3 data-i18n="a11y.fonte">Tamanho da fonte</h3>
+
+            <div class="botoes-controle">
+              <button id="diminuir-fonte" aria-label="Diminuir fonte" data-i18n-attr="aria-label:a11y.fonte.menos">
+                A-
+              </button>
+
+              <span id="valor-fonte">100%</span>
+
+              <button id="aumentar-fonte" aria-label="Aumentar fonte" data-i18n-attr="aria-label:a11y.fonte.mais">
+                A+
+              </button>
+            </div>
+          </section>
+
+          <!-- Espaçamento entre letras -->
+          <section class="controle-acessibilidade">
+            <h3 data-i18n="a11y.espacamento">Espaçamento entre letras</h3>
+
+            <div class="botoes-controle">
+              <button id="diminuir-espacamento" aria-label="Diminuir espaçamento entre letras"
+                data-i18n-attr="aria-label:a11y.espacamento.menos">
+                A-
+              </button>
+
+              <span id="valor-espacamento">0px</span>
+
+              <button id="aumentar-espacamento" aria-label="Aumentar espaçamento entre letras"
+                data-i18n-attr="aria-label:a11y.espacamento.mais">
+                A+
+              </button>
+            </div>
+          </section>
+
+          <button id="restaurar-acessibilidade" class="botao-restaurar" data-i18n="a11y.restaurar">
+            Restaurar configurações
+          </button>
+
+        </div>
+      </aside>
       <button id="alternar-tema" class="botao-tema" type="button" aria-label="Alternar tema claro/escuro" data-i18n-attr="aria-label:tema.aria">🌗</button>
     </nav>
   </header>
@@ -39,6 +104,7 @@
         <a class="botao botao-primario" href="#contribuir" data-i18n="hero.cta">Como participar</a>
         <a class="botao" href="docs/gitflow.html" data-i18n="hero.guia">Guia do fluxo</a>
         <a class="botao" href="docs/desvantagens.html" data-i18n="hero.desvantagens">Desvantagens</a>
+        <a class="botao" href="docs/conclusao.html" data-i18n="hero.conclusao">Conclusão</a>
       </div>
       <dl class="metricas">
         <div><dt data-i18n="metricas.versao">Versão publicada</dt><dd><span class="selo-versao" id="versao">—</span></dd></div>
