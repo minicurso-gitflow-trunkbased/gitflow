@@ -20,6 +20,7 @@
   "hero.sub": "The lab on the other side of the comparison. Here nothing goes straight to <code>main</code>: all work goes through <code>develop</code>, becomes a <code>release/*</code>, gets a tag and only then is published.",
   "hero.cta": "How to take part",
   "hero.guia": "Workflow guide",
+  "hero.desvantagens": "Drawbacks",
   "metricas.versao": "Published version",
   "metricas.participantes": "Participants",
   "metricas.branches": "Permanent branches",
@@ -107,6 +108,7 @@
   "docs.q4": "On the upside: could you say exactly <em>which version</em> contains each change?",
   "docs.q5": "And could you roll the whole site back to a previous version with one command?",
   "docs.voltar": "← Back to the home page",
+  "docs.desvantagens": "See the drawbacks of Gitflow →",
 
   "erro404.etiqueta": "Error 404",
   "erro404.titulo": "This page didn't make it into the release",

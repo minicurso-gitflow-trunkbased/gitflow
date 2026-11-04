@@ -20,6 +20,7 @@
   "hero.sub": "O laboratório do outro lado da comparação. Aqui nada vai direto para a <code>main</code>: todo trabalho passa por <code>develop</code>, vira um <code>release/*</code>, ganha uma tag e só então é publicado.",
   "hero.cta": "Como participar",
   "hero.guia": "Guia do fluxo",
+  "hero.desvantagens": "Desvantagens",
   "metricas.versao": "Versão publicada",
   "metricas.participantes": "Participantes",
   "metricas.branches": "Branches fixas",
@@ -107,6 +108,7 @@
   "docs.q4": "Em compensação: você conseguiu dizer exatamente <em>qual versão</em> tem cada mudança?",
   "docs.q5": "E conseguiu voltar o site inteiro para uma versão anterior com um comando?",
   "docs.voltar": "← Voltar para a página inicial",
+  "docs.desvantagens": "Ver as desvantagens do Gitflow →",
 
   "erro404.etiqueta": "Erro 404",
   "erro404.titulo": "Essa página não entrou no release",
