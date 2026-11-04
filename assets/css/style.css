@@ -201,3 +201,19 @@ pre code { background: none; padding: 0; }
 /* =========================================================
    ↓↓↓ ADICIONE SEUS ESTILOS ABAIXO DESTA LINHA ↓↓↓
    ========================================================= */
+
+/* ---------- para que serve ---------- */
+.quando-usar {
+  margin-top: 1.25rem;
+}
+
+.duas-colunas {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.quando-usar p {
+  margin: 0 0 .6rem;
+  color: var(--texto);
+}

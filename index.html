@@ -187,6 +187,147 @@ git push -u origin feature/seu-usuario
         <a href="https://github.com/minicurso-gitflow-trunkbased/gitflow/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.
       </p>
     </section>
+
+    <section id="para-que-serve" class="container secao">
+      <h2>Para que serve o Gitflow</h2>
+      <p class="secao-intro">
+        Gitflow é um modelo de ramificação que organiza <em>quando</em> e <em>onde</em> cada
+        tipo de trabalho acontece. Ele separa o código que está em produção do código em
+        desenvolvimento, para que publicar uma versão seja um ato planejado, e não um acidente.
+      </p>
+
+      <div class="cartoes">
+        <article class="cartao">
+          <h3>Versões planejadas</h3>
+          <p>Ideal para software que é entregue em versões numeradas (1.0, 1.1, 2.0…), como aplicativos, bibliotecas e sistemas com janela de lançamento.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Escopo congelado em cada release</li>
+            <li class="ok">Versão e changelog bem definidos</li>
+          </ul>
+        </article>
+
+        <article class="cartao">
+          <h3>Produção protegida</h3>
+          <p>A <code>main</code> só recebe código estabilizado e com tag. Nada chega lá sem passar por <code>develop</code> e por um <code>release/*</code>.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Cada commit na <code>main</code> é uma versão publicada</li>
+            <li class="ok">Fácil voltar para qualquer versão anterior</li>
+          </ul>
+        </article>
+
+        <article class="cartao">
+          <h3>Trabalho em paralelo</h3>
+          <p>Cada tarefa vive em sua própria <code>feature/*</code>, então várias pessoas avançam ao mesmo tempo sem pisar no trabalho umas das outras.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Features isoladas até ficarem prontas</li>
+            <li class="ok">Revisão via Pull Request antes de integrar</li>
+          </ul>
+        </article>
+
+        <article class="cartao">
+          <h3>Emergências sob controle</h3>
+          <p>Um bug em produção não precisa esperar o próximo release: o <code>hotfix/*</code> sai da <code>main</code>, corrige e volta para <code>main</code> e <code>develop</code>.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Correção rápida sem levar código incompleto</li>
+            <li class="ok">A correção não se perde na próxima versão</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="cartao destaque quando-usar">
+        <h3>Quando vale a pena (e quando não)</h3>
+        <div class="duas-colunas">
+          <div>
+            <p><strong>Faz sentido quando:</strong></p>
+            <ul class="lista-marcada">
+              <li class="ok">Há várias versões em suporte ao mesmo tempo</li>
+              <li class="ok">Existe etapa de homologação ou QA antes de publicar</li>
+              <li class="ok">O time precisa de releases previsíveis</li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Pesa demais quando:</strong></p>
+            <ul class="lista-marcada">
+              <li class="nao">Você publica várias vezes ao dia</li>
+              <li class="nao">Há um único ambiente em produção, sem versões</li>
+              <li class="nao">O time é pequeno e quer feedback contínuo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="para-que-serve" class="container secao">
+      <h2>Para que serve o Gitflow</h2>
+      <p class="secao-intro">
+        Gitflow é um modelo de ramificação que organiza <em>quando</em> e <em>onde</em> cada
+        tipo de trabalho acontece. Ele separa o código que está em produção do código em
+        desenvolvimento, para que publicar uma versão seja um ato planejado, e não um acidente.
+      </p>
+    
+      <div class="cartoes">
+        <article class="cartao">
+          <h3>Versões planejadas</h3>
+          <p>Ideal para software que é entregue em versões numeradas (1.0, 1.1, 2.0…), como aplicativos, bibliotecas e
+            sistemas com janela de lançamento.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Escopo congelado em cada release</li>
+            <li class="ok">Versão e changelog bem definidos</li>
+          </ul>
+        </article>
+    
+        <article class="cartao">
+          <h3>Produção protegida</h3>
+          <p>A <code>main</code> só recebe código estabilizado e com tag. Nada chega lá sem passar por <code>develop</code>
+            e por um <code>release/*</code>.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Cada commit na <code>main</code> é uma versão publicada</li>
+            <li class="ok">Fácil voltar para qualquer versão anterior</li>
+          </ul>
+        </article>
+    
+        <article class="cartao">
+          <h3>Trabalho em paralelo</h3>
+          <p>Cada tarefa vive em sua própria <code>feature/*</code>, então várias pessoas avançam ao mesmo tempo sem pisar
+            no trabalho umas das outras.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Features isoladas até ficarem prontas</li>
+            <li class="ok">Revisão via Pull Request antes de integrar</li>
+          </ul>
+        </article>
+    
+        <article class="cartao">
+          <h3>Emergências sob controle</h3>
+          <p>Um bug em produção não precisa esperar o próximo release: o <code>hotfix/*</code> sai da <code>main</code>,
+            corrige e volta para <code>main</code> e <code>develop</code>.</p>
+          <ul class="lista-marcada">
+            <li class="ok">Correção rápida sem levar código incompleto</li>
+            <li class="ok">A correção não se perde na próxima versão</li>
+          </ul>
+        </article>
+      </div>
+    
+      <div class="cartao destaque quando-usar">
+        <h3>Quando vale a pena (e quando não)</h3>
+        <div class="duas-colunas">
+          <div>
+            <p><strong>Faz sentido quando:</strong></p>
+            <ul class="lista-marcada">
+              <li class="ok">Há várias versões em suporte ao mesmo tempo</li>
+              <li class="ok">Existe etapa de homologação ou QA antes de publicar</li>
+              <li class="ok">O time precisa de releases previsíveis</li>
+            </ul>
+          </div>
+          <div>
+            <p><strong>Pesa demais quando:</strong></p>
+            <ul class="lista-marcada">
+              <li class="nao">Você publica várias vezes ao dia</li>
+              <li class="nao">Há um único ambiente em produção, sem versões</li>
+              <li class="nao">O time é pequeno e quer feedback contínuo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="rodape">
