@@ -48,7 +48,7 @@ async function htmls(dir) {
 for (const caminho of await htmls('.')) {
   const html = await readFile(caminho, 'utf8');
   if (!/<!DOCTYPE html>/i.test(html)) aviso(`${caminho}: falta <!DOCTYPE html>`);
-  if (!/<title>[^<]+<\/title>/i.test(html)) aviso(`${caminho}: falta <title> preenchido`);
+  if (!/<title[^>]*>[^<]+<\/title>/i.test(html)) aviso(`${caminho}: falta <title> preenchido`);
   if (!/<html[^>]+lang=/i.test(html)) aviso(`${caminho}: <html> sem atributo lang`);
 
   const base = caminho.split('/').slice(1, -1).join('/'); // caminho relativo à raiz do arquivo
@@ -63,6 +63,32 @@ for (const caminho of await htmls('.')) {
     }, []).join('/');
     if (normalizado && !existsSync(normalizado)) {
       aviso(`${caminho}: referência quebrada para "${ref}"`);
+    }
+  }
+}
+
+// 3b. i18n: os dicionários têm as mesmas chaves do pt-BR e o HTML só usa chaves existentes.
+if (existsSync('assets/i18n/pt-BR.json')) {
+  const carregar = async (idioma) => JSON.parse(await readFile(`assets/i18n/${idioma}.json`, 'utf8'));
+  const referencia = await carregar('pt-BR');
+  for (const idioma of ['en-US', 'es-ES']) {
+    if (!existsSync(`assets/i18n/${idioma}.json`)) { aviso(`dicionário ausente: assets/i18n/${idioma}.json`); continue; }
+    const dicionario = await carregar(idioma);
+    for (const chave of Object.keys(referencia)) {
+      if (!(chave in dicionario)) aviso(`${idioma}.json: falta a chave "${chave}"`);
+    }
+    for (const chave of Object.keys(dicionario)) {
+      if (!(chave in referencia)) aviso(`${idioma}.json: chave "${chave}" não existe no pt-BR.json`);
+    }
+  }
+  for (const caminho of await htmls('.')) {
+    const html = await readFile(caminho, 'utf8');
+    const usadas = [...html.matchAll(/data-i18n(?:-html)?="([^"]+)"/g)].map((m) => m[1]);
+    for (const [, atributos] of html.matchAll(/data-i18n-attr="([^"]+)"/g)) {
+      for (const par of atributos.split(';')) usadas.push(par.split(':')[1]?.trim());
+    }
+    for (const chave of usadas) {
+      if (!(chave in referencia)) aviso(`${caminho}: chave de tradução inexistente "${chave}"`);
     }
   }
 }
