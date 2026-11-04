@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusões sobre o GitFlow</title>
+    <meta name="description"
+        content="Análise conclusiva sobre o GitFlow: prós, contras, cenários ideais de uso e reflexões sobre a sua viabilidade no desenvolvimento moderno.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⑂</text></svg>">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Conclusão: O Uso do GitFlow</h1>
+
+        <p>O <strong>GitFlow não está obsoleto, mas tornou-se um modelo de nicho</strong>. Ele deixou de ser a escolha
+            padrão para a maioria das empresas modernas de tecnologia (SaaS e Web), mas permanece insubstituível em
+            cenários que exigem controle rígido de versões.</p>
+
+        <blockquote>
+            "Se o seu software exige suporte a múltiplas versões em produção simultaneamente, ou se você tem um ciclo de
+            lançamento tradicional, o GitFlow ainda pode ser a escolha certa. Mas para aplicações web que são
+            atualizadas continuamente, fluxos mais simples como o GitHub Flow são mais adequados."
+            <br><small>— Vincent Driessen, Criador do GitFlow (Reflexão adicionada em 2020)</small>
+        </blockquote>
+
+        <div class="grid">
+            <div class="card card-pros">
+                <h2>Quando Vale a Pena?</h2>
+                <ul>
+                    <li><strong>Organização Impecável:</strong> Excelente para gerenciar lançamentos de versões
+                        específicas e bem definidas (ex: Versão 1.0, 2.0).</li>
+                    <li><strong>Segurança e Auditoria:</strong> Ideal para ambientes altamente regulados (bancos, saúde)
+                        que exigem múltiplos testes e aprovações humanas.</li>
+                    <li><strong>Produção Protegida:</strong> A branch <code>main</code> fica totalmente isolada do caos
+                        do desenvolvimento diário.</li>
+                </ul>
+            </div>
+
+            <div class="card card-contras">
+                <h2>Quando se Torna um Problema?</h2>
+                <ul>
+                    <li><strong>O Inferno dos Merges:</strong> Manter branches separadas por muito tempo gera conflitos
+                        massivos e complexos na hora de juntar o código.</li>
+                    <li><strong>Incompatível com CI/CD:</strong> Ele atrasa o processo de deploy, indo contra a cultura
+                        moderna de lançar atualizações várias vezes ao dia.</li>
+                    <li><strong>Burocracia Desnecessária:</strong> Para equipes pequenas ou projetos simples, abrir e
+                        fechar 5 tipos de branches gera uma complexidade inútil.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
