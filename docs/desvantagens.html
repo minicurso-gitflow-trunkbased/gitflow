@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="meta.title.desv">Desvantagens do Gitflow — Minicurso Gitflow</title>
-    <meta name="description" data-i18n-attr="content:meta.desc.desv"
-        content="Análise das desvantagens, custos operacionais e armadilhas do modelo Gitflow em comparação ao Trunk-Based Development.">
+    <title>Vantagens e desvantagens do Gitflow — Minicurso Gitflow</title>
+    <meta name="description"
+        content="Análise das vantagens, desvantagens, custos operacionais e armadilhas do modelo Gitflow em comparação ao Trunk-Based Development.">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⑂</text></svg>">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -19,11 +19,12 @@
         <nav class="nav container" aria-label="Navegação principal" data-i18n-attr="aria-label:nav.aria">
             <a class="marca" href="../index.html">⑂ <strong>Minicurso</strong> Gitflow</a>
             <ul class="nav-links">
-                <li><a href="../index.html" data-i18n="desv.nav.inicio">Início</a></li>
-                <li><a href="gitflow.html" data-i18n="desv.nav.guia">Guia do fluxo</a></li>
-                <li><a href="#custos" data-i18n="desv.nav.custos">Custos</a></li>
-                <li><a href="#comparacao" data-i18n="desv.nav.comparacao">Comparação</a></li>
-                <li><a href="#quando-evitar" data-i18n="desv.nav.evitar">Quando evitar</a></li>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="gitflow.html">Guia do fluxo</a></li>
+                <li><a href="#beneficios">Benefícios</a></li>
+                <li><a href="#custos">Custos</a></li>
+                <li><a href="#comparacao">Comparação</a></li>
+                <li><a href="#quando-evitar">Quando evitar</a></li>
             </ul>
             <div id="seletor-idioma" class="seletor-idioma"></div>
             <button id="alternar-tema" class="botao-tema" type="button"
@@ -33,14 +34,112 @@
 
     <main id="conteudo">
         <section class="container hero">
-            <p class="etiqueta" data-i18n="desv.etiqueta">Análise crítica</p>
-            <h1 data-i18n="desv.titulo">As desvantagens do Gitflow</h1>
-            <p class="subtitulo" data-i18n="desv.sub">
-                Controle e previsibilidade têm preço. Entenda por que o excesso de branches,
-                cerimônias de release e integrações tardias tornam o Gitflow um gargalo para
+            <p class="etiqueta">Análise crítica</p>
+            <h1>Vantagens e desvantagens do Gitflow</h1>
+            <p class="subtitulo">
+                Controle e previsibilidade têm preço. Veja o que o Gitflow entrega de melhor —
+                organização, releases rastreáveis e uma produção protegida — e por que o excesso de
+                branches, cerimônias de release e integrações tardias o tornam um gargalo para
                 times que buscam entrega contínua.
             </p>
         </section>
+
+        <section id="beneficios" class="container secao">
+            <h2>Os 6 principais benefícios</h2>
+            <p class="secao-intro">
+                Antes de olhar para os custos, vale reconhecer por que o Gitflow se tornou tão popular.
+                Abaixo estão os ganhos clássicos que esse modelo oferece às equipes.
+            </p>
+
+            <div class="cartoes">
+                <article class="cartao">
+                    <h3>1. Produção sempre estável</h3>
+                    <p>
+                        A <code>main</code> só recebe código que passou pela <code>develop</code> e foi
+                        estabilizado em uma <code>release/*</code>. Cada commit nela representa uma versão
+                        pronta para ser publicada.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>2. Papéis claros para cada branch</h3>
+                    <p>
+                        Todo tipo de trabalho tem seu lugar: <code>feature/*</code> para novidades,
+                        <code>release/*</code> para preparar versões e <code>hotfix/*</code> para
+                        emergências. Qualquer pessoa sabe onde cada mudança está.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>3. Versionamento e histórico rastreáveis</h3>
+                    <p>
+                        Cada release gera uma tag, atualiza o <code>VERSION</code> e fecha o
+                        <code>CHANGELOG.md</code>. Fica fácil responder "o que entrou na v1.4.0?" ou voltar
+                        para uma versão específica.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>4. Desenvolvimento paralelo isolado</h3>
+                    <p>
+                        Várias funcionalidades avançam ao mesmo tempo em branches separadas. Uma
+                        <code>feature/*</code> incompleta ou instável não atrapalha o trabalho do restante
+                        do time.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>5. Hotfix sem carregar trabalho inacabado</h3>
+                    <p>
+                        Como a <code>hotfix/*</code> nasce da <code>main</code>, a correção emergencial vai
+                        para o ar sem arrastar junto as funcionalidades ainda em teste na
+                        <code>develop</code>.
+                    </p>
+                </article>
+
+                <article class="cartao">
+                    <h3>6. Pontos naturais de revisão e homologação</h3>
+                    <p>
+                        A <code>release/*</code> cria uma janela dedicada para QA, testes de aceitação e
+                        aprovação formal antes da publicação — algo valioso em ambientes regulados ou
+                        auditados.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="container secao">
+            <h2>A anatomia da segurança</h2>
+            <p class="secao-intro">
+                Veja como cada etapa do fluxo funciona como uma barreira de proteção entre a escrita de
+                uma linha de código e a publicação em produção:
+            </p>
+        
+            <ol class="linha-tempo">
+                <li>
+                    <h3>Experimentação livre na <code>feature/*</code></h3>
+                    <p>O desenvolvedor pode errar, refazer e testar à vontade sem nenhum risco para a base
+                        compartilhada ou para os usuários finais.</p>
+                </li>
+                <li>
+                    <h3>Integração revisada na <code>develop</code></h3>
+                    <p>O merge acontece via Pull Request com revisão de código, reunindo as funcionalidades
+                        prontas em um ambiente de integração antes de qualquer publicação.</p>
+                </li>
+                <li>
+                    <h3>Estabilização na <code>release/*</code></h3>
+                    <p>Com o escopo congelado, o time foca apenas em testes e correções, prepara o
+                        <code>VERSION</code> e documenta tudo no <code>CHANGELOG.md</code>.
+                    </p>
+                </li>
+                <li>
+                    <h3>Publicação versionada na <code>main</code></h3>
+                    <p>O merge final gera uma tag imutável, permitindo identificar exatamente o que está em
+                        produção e reconstruir qualquer versão anterior quando necessário.</p>
+                </li>
+            </ol>
+        </section>
+
 
         <section id="custos" class="container secao">
             <h2 data-i18n="desv.custos.titulo">Os 6 principais pontos de dor</h2>
@@ -125,15 +224,17 @@
                         sem gerar valor para o usuário final.</p>
                 </li>
                 <li>
-                    <h3 data-i18n-html="desv.a3.t">Congelamento de escopo na <code>release/*</code></h3>
-                    <p data-i18n-html="desv.a3.p">O time precisa coordenar uma parada para preparar <code>VERSION</code>, fechar o
-                        <code>CHANGELOG.md</code> e testar um pacote grande de mudanças acumuladas.</p>
+                    <h3>Congelamento de escopo na <code>release/*</code></h3>
+                    <p>O time precisa coordenar uma parada para preparar <code>VERSION</code>, fechar o
+                        <code>CHANGELOG.md</code> e testar um pacote grande de mudanças acumuladas.
+                    </p>
                 </li>
                 <li>
                     <h3 data-i18n="desv.a4.t">Sincronização dupla no Hotfix</h3>
                     <p data-i18n-html="desv.a4.p">Uma emergência em produção exige criar <code>hotfix/*</code> a partir da <code>main</code>,
                         incrementar o patch e gerenciar dois merges distintos (<code>main</code> e
-                        <code>develop</code>).</p>
+                        <code>develop</code>).
+                    </p>
                 </li>
             </ol>
         </section>
@@ -160,10 +261,11 @@
                             <td data-i18n-html="desv.comp.r1.t">1 (apenas <code>main</code>)</td>
                         </tr>
                         <tr>
-                            <td><strong data-i18n="desv.comp.r2">Caminho até produção</strong></td>
-                            <td data-i18n-html="desv.comp.r2.g"><code>feature/*</code> → <code>develop</code> → <code>release/*</code> →
-                                <code>main</code></td>
-                            <td data-i18n-html="desv.comp.r2.t">Commit direto ou PR curto para <code>main</code></td>
+                            <td><strong>Caminho até produção</strong></td>
+                            <td><code>feature/*</code> → <code>develop</code> → <code>release/*</code> →
+                                <code>main</code>
+                            </td>
+                            <td>Commit direto ou PR curto para <code>main</code></td>
                         </tr>
                         <tr>
                             <td><strong data-i18n="desv.comp.r3">Correção de emergência</strong></td>
