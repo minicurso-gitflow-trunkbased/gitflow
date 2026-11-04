@@ -58,8 +58,8 @@ jobs:
                 exit 1
               fi ;;
             *)
-              if [ "$DESTINO" = "main" ]; then
-                echo "::error::Só release/*, hotfix/* e backmerge/* podem integrar na main. Renomeie sua branch ou mire na develop."
+              if [ "$DESTINO" = "main" ] && [ "$ORIGEM" != "develop" ]; then
+                echo "::error::Só release/*, hotfix/* e a própria develop podem integrar na main. Renomeie sua branch ou mire na develop."
                 exit 1
               fi
               echo "::warning::Branch '$ORIGEM' fora da convenção do Gitflow (feature/*, release/*, hotfix/*). Integração na '$DESTINO' permitida, mas renomeie quando puder." ;;
